@@ -9,9 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * Created by ddubs on 12/1/2016.
- */
 @Component
 public class Producer implements CommandLineRunner {
     private final RabbitMessagingTemplate messagingTemplate;
@@ -23,7 +20,6 @@ public class Producer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         Notification notification = new Notification(UUID.randomUUID().toString(), "Hello World!", LocalDate.now());
-
         Map<String, Object> headers = new HashMap<>();
         headers.put("notification-id", notification.getId());
 

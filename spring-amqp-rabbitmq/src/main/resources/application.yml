@@ -1,0 +1,4 @@
+logging.level:
+  org.springframework.context: ERROR
+
+spring.main.banner-mode: "off"

@@ -1,4 +1,2 @@
 rootProject.name = 'integration-and-messaging'
-include 'spring-amqp-rabbitmq'
-include 'file-transfer-pattern'
-include 'spring-jms-simple'
+include 'commons', 'spring-amqp-rabbitmq', 'file-transfer-pattern' , 'spring-jms-simple'

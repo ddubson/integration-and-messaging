@@ -1,14 +1,13 @@
 package amqp;
 
+import com.ddubson.CommandLineLogAdapter;
+import com.ddubson.LogAdapter;
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-/**
- * Created by ddubs on 11/29/2016.
- */
 @SpringBootApplication
 public class Application {
     public static final String NOTIFICATIONS = "notifications";
@@ -29,5 +28,8 @@ public class Application {
         };
     }
 
-
+    @Bean
+    public LogAdapter logAdapter() {
+        return new CommandLineLogAdapter();
+    }
 }
