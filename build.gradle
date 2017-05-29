@@ -1,6 +1,7 @@
 ext {
     springVersion = "4.3.7.RELEASE"
     springBootVersion = "1.5.3.RELEASE"
+    camelVersion = "2.18.1"
 }
 version '1.0'
 
@@ -53,7 +54,7 @@ project(":spring-jms-simple") {
 
 project(":file-transfer-pattern") {
     dependencies {
-        compile 'org.apache.camel:camel-core:2.18.1'
-        compile 'org.apache.camel:camel-ftp:2.18.1'
+        compile "org.apache.camel:camel-core:$camelVersion"
+        compile "org.apache.camel:camel-ftp:$camelVersion"
     }
 }

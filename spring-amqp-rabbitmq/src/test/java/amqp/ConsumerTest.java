@@ -22,13 +22,15 @@ public class ConsumerTest {
     @InjectMocks
     private Consumer consumer;
 
+    private LocalDate today = LocalDate.now();
+
     @Test
     public void onNotification_LogsMessageAndHeadersThatWereReceived() {
         String expectedMessage = "[Message: Hello World!]";
-        LocalDate today = LocalDate.now();
 
         Notification notification = new Notification(UUID.randomUUID().toString(), expectedMessage, today);
         Message<Notification> message = new GenericMessage<>(notification);
+
         consumer.onNotification(message);
 
         verify(logAdapter).info(String.format("[Headers: %s]", message.getHeaders()));
