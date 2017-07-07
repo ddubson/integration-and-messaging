@@ -2,7 +2,7 @@ package spring.jms.nontemplated.front;
 
 
 import org.springframework.stereotype.Component;
-import spring.jms.Mail;
+import spring.jms.shared.Mail;
 
 @Component
 @FunctionalInterface

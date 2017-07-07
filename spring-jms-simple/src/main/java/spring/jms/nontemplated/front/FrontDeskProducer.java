@@ -1,7 +1,7 @@
 package spring.jms.nontemplated.front;
 
-import spring.jms.Mail;
-import spring.jms.provider.JMSProvider;
+import spring.jms.shared.Mail;
+import spring.jms.shared.provider.JMSProvider;
 
 import javax.jms.*;
 

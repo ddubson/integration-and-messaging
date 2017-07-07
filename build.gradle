@@ -1,19 +1,15 @@
 ext {
-    springVersion = "4.3.7.RELEASE"
-    springBootVersion = "1.5.3.RELEASE"
+    springVersion = "4.3.9.RELEASE"
+    springBootVersion = "1.5.4.RELEASE"
     camelVersion = "2.18.1"
+    activeMQClientVersion = "5.14.1"
 }
+
+apply plugin: 'application'
+
 version '1.0'
-
-apply plugin: 'java'
-
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-
-
-allprojects {
-
-}
 
 subprojects {
     apply plugin: "java"
@@ -32,9 +28,7 @@ subprojects {
     }
 }
 
-project(":commons") {
-
-}
+project(":commons") {}
 
 project(":spring-amqp-rabbitmq") {
     dependencies {
@@ -47,8 +41,10 @@ project(":spring-amqp-rabbitmq") {
 
 project(":spring-jms-simple") {
     dependencies {
+        compile project(":commons")
         compile "org.springframework:spring-jms:${springVersion}"
-        compile 'org.apache.activemq:activemq-client:5.14.1'
+        compile "org.apache.activemq:activemq-client:${activeMQClientVersion}"
+        testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
     }
 }
 

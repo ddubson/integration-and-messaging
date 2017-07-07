@@ -1,0 +1,12 @@
+activemq:
+  broker-url: tcp://localhost:61616
+  queue-name: mail.queue
+
+logging:
+  level:
+    root: WARN
+
+spring:
+  main:
+    banner-mode: "off"
+

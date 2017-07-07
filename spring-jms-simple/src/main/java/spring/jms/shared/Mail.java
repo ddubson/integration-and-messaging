@@ -1,4 +1,4 @@
-package spring.jms;
+package spring.jms.shared;
 
 public class Mail {
     private String mailId;

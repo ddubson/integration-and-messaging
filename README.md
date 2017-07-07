@@ -1,6 +1,6 @@
 # Integration and Messaging Projects
 
-## File Transfer Pattern Project
+## File Transfer Pattern Project (file-transfer-pattern)
 
 ### Flow
 
@@ -10,8 +10,16 @@
 
 Note: Make sure the home directory on FTP server, the user has create/delete permissions on directories.
 
-## Spring AMQP - RabbitMQ Project
+## Spring AMQP - RabbitMQ Project (spring-amqp-rabbitmq)
 
 ### Running
 
 Start RabbitMQ by running `rabbitmq-server` command on macOS
+
+## Spring JMS (spring-jms-simple)
+
+Must have `activemq` installed.
+
+> MacOS: `brew install activemq`
+
+Start activemq via `activemq start`
