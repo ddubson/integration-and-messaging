@@ -55,7 +55,7 @@ project(":file-transfer-pattern") {
     }
 }
 
-project(":spring-integration:basic-integration") {
+configure(subprojects.findAll { it.path.startsWith(':spring-integration') }) {
     dependencies {
         compile "org.springframework.integration:spring-integration-core:${springVersion}"
     }
