@@ -54,3 +54,9 @@ project(":file-transfer-pattern") {
         compile "org.apache.camel:camel-ftp:$camelVersion"
     }
 }
+
+project(":spring-integration:basic-integration") {
+    dependencies {
+        compile "org.springframework.integration:spring-integration-core:${springVersion}"
+    }
+}
