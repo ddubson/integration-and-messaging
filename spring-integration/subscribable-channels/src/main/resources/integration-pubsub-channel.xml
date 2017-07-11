@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
+    <!-- task executor - thread pool of 5 -->
+    <task:executor id="executor" pool-size="5"/>
+
+    <int:publish-subscribe-channel id="publishSubscribeChannel" task-executor="executor"/>
+
+    <int:gateway service-interface="com.ddubson.PrinterGateway"
+                 id="pubSubChannelGateway" default-request-channel="publishSubscribeChannel"/>
+
+    <bean class="com.ddubson.PrintService" id="printService"/>
+    <bean class="com.ddubson.UppercasePrintService" id="uppercasePrintService"/>
+
+    <int:service-activator order="1" ref="printService" method="print" input-channel="publishSubscribeChannel"/>
+    <int:service-activator order="2" ref="uppercasePrintService" method="print"
+                           input-channel="publishSubscribeChannel"/>
+</beans>

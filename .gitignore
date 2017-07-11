@@ -3,3 +3,8 @@ build/
 *.iml
 .gradle/
 classes/
+
+.classpath
+.project
+.settings/
+bin/

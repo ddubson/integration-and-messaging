@@ -1,5 +1,13 @@
 # Integration and Messaging Projects
 
+## Spring Integration
+
+### Basic Integration (basic-integration)
+
+Input Channel -> Service Activator (Endpoint) -> Output Channel
+
+![basic-integration-schema](https://github.com/ddubson/integration-and-messaging/blob/master/assets/basic-integration-schema.png)
+
 ## File Transfer Pattern Project (file-transfer-pattern)
 
 ### Flow
