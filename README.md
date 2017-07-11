@@ -30,7 +30,7 @@ Input Channel -> Service Activator (Endpoint) -> Output Channel
 
 ### Messaging Bridge
 
-![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/messaging-bridge-schema.png)
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/message-bridge-schema.png)
 
 ### Router
 
