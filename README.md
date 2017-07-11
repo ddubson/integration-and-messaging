@@ -28,9 +28,17 @@ Input Channel -> Service Activator (Endpoint) -> Output Channel
 
 ![subscribable-queue-channel-schema](https://github.com/ddubson/integration-and-messaging/blob/master/assets/subscribable-pubsub-channel-schema.png)
 
-## Messaging Bridge
+### Messaging Bridge
 
-![subscribable-queue-channel-schema](https://github.com/ddubson/integration-and-messaging/blob/master/assets/messaging-bridge-schema.png)
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/messaging-bridge-schema.png)
+
+### Router
+
+#### Payload Type Router
+
+Routes based on the type of payload enclosed in Message
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/router-payload-type.png)
 
 
 ---

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
+    <int:gateway service-interface="com.ddubson.PrinterGateway" id="gateway" default-request-channel="inputChannel"/>
+
+    <int:payload-type-router id="payloadRouter" input-channel="inputChannel">
+        <int:mapping type="java.lang.Integer" channel="intChannel"/>
+        <int:mapping type="java.lang.String" channel="stringChannel"/>
+    </int:payload-type-router>
+
+    <int:channel id="inputChannel" />
+    <int:channel id="intChannel" />
+    <int:channel id="stringChannel" />
+
+    <bean id="stringPrintService" class="com.ddubson.StringPrintService" />
+    <bean id="numericPrintService" class="com.ddubson.NumericPrintService" />
+
+    <int:service-activator id="numberPrint" ref="numericPrintService" method="print" input-channel="intChannel" />
+    <int:service-activator id="stringPrint" ref="stringPrintService" method="print" input-channel="stringChannel" />
+</beans>

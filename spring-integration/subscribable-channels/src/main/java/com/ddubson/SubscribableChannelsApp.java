@@ -12,6 +12,8 @@ import org.springframework.messaging.support.MessageBuilder;
 
 import java.util.stream.Stream;
 
+import static com.ddubson.ConsolePrinterUtils.printBanner;
+
 @SpringBootApplication
 @ImportResource("integration-context.xml")
 public class SubscribableChannelsApp implements ApplicationRunner {
@@ -77,10 +79,6 @@ public class SubscribableChannelsApp implements ApplicationRunner {
         });
 
         printBanner("END SUBSCRIBABLE ROUND-ROBIN CHANNEL");
-    }
-
-    private void printBanner(String x) {
-        System.out.format("------ %s ------\n", x);
     }
 
     public static void main(String[] args) {
