@@ -5,7 +5,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 
@@ -17,18 +16,17 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
 @SpringBootApplication
-@ImportResource("integration-context.xml")
 public class PollableChannelsApp implements ApplicationRunner {
     @Autowired
     private PrinterGateway gateway;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        gatewayAndPollableChannel();
-        gatewayAndPriorityPollableChannel();
+        gatewayAndQueueChannel();
+        gatewayAndPriorityQueueChannel();
     }
 
-    private void gatewayAndPriorityPollableChannel() {
+    private void gatewayAndPriorityQueueChannel() {
         printBanner("PRIORITY POLLABLE CHANNEL");
         List<Future<Message<String>>> futures = Stream.iterate(0, n -> n + 1).limit(10).map(i -> {
             Message<String> message = org.springframework.integration.support.MessageBuilder
@@ -44,7 +42,7 @@ public class PollableChannelsApp implements ApplicationRunner {
         printBanner("END PRIORITY POLLABLE CHANNEL");
     }
 
-    private void gatewayAndPollableChannel() {
+    private void gatewayAndQueueChannel() {
         printBanner("STANDARD POLLABLE CHANNEL");
         List<Future<Message<String>>> futures = Stream.iterate(0, n -> n + 1).limit(10).map(i -> {
             Message<String> message = MessageBuilder
