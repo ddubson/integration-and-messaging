@@ -15,7 +15,7 @@
     </int:channel>
     <int:publish-subscribe-channel id="bridgedPubSubChannel" task-executor="executor"/>
 
-    <int:bridge input-channel="bridgedPollableChannel" output-channel="bridgedPubSubChannel">
+    <int:bridge input-channel="bridgedPollableChannel" id="messageBridge" output-channel="bridgedPubSubChannel">
         <int:poller fixed-delay="5" time-unit="SECONDS" max-messages-per-poll="2" />
     </int:bridge>
 
@@ -26,7 +26,7 @@
     <bean class="com.ddubson.PrintService" id="printService"/>
     <bean class="com.ddubson.UppercasePrintService" id="uppercasePrintService"/>
 
-    <int:service-activator order="1" ref="printService" method="print" input-channel="bridgedPubSubChannel"/>
-    <int:service-activator order="2" ref="uppercasePrintService" method="print"
+    <int:service-activator order="1" id="consumer1" ref="printService" method="print" input-channel="bridgedPubSubChannel"/>
+    <int:service-activator order="2" id="consumer2" ref="uppercasePrintService" method="print"
                            input-channel="bridgedPubSubChannel"/>
 </beans>

@@ -10,9 +10,30 @@ Input Channel -> Service Activator (Endpoint) -> Output Channel
 
 ### Pollable Channels
 
-#### Pollable Queue Channel
+#### Queue Channel
 
 ![pollable-queue-channel-schema](https://github.com/ddubson/integration-and-messaging/blob/master/assets/pollable-queue-channel-schema.png)
+
+#### Priority Queue Channel
+
+![pollable-queue-channel-schema](https://github.com/ddubson/integration-and-messaging/blob/master/assets/pollable-priority-queue-channel-schema.png)
+
+### Subscribable Channels
+
+#### Direct Channel
+
+![subscribable-queue-channel-schema](https://github.com/ddubson/integration-and-messaging/blob/master/assets/subscribable-direct-channel-schema.png)
+
+#### Publish-Subscribe Channel
+
+![subscribable-queue-channel-schema](https://github.com/ddubson/integration-and-messaging/blob/master/assets/subscribable-pubsub-channel-schema.png)
+
+## Messaging Bridge
+
+![subscribable-queue-channel-schema](https://github.com/ddubson/integration-and-messaging/blob/master/assets/messaging-bridge-schema.png)
+
+
+---
 
 ## File Transfer Pattern Project (file-transfer-pattern)
 

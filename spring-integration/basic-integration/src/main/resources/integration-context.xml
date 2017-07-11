@@ -10,7 +10,8 @@
 
     <bean class="com.ddubson.PrintService" id="printService"/>
 
-    <int:service-activator ref="printService" method="print"
+    <int:service-activator id="serviceActivator"
+                           ref="printService" method="print"
                            input-channel="inputChannel"
                            output-channel="outputChannel"/>
 </beans>
