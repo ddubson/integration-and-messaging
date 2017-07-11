@@ -8,6 +8,12 @@ Input Channel -> Service Activator (Endpoint) -> Output Channel
 
 ![basic-integration-schema](https://github.com/ddubson/integration-and-messaging/blob/master/assets/basic-integration-schema.png)
 
+### Pollable Channels
+
+#### Pollable Queue Channel
+
+![pollable-queue-channel-schema](https://github.com/ddubson/integration-and-messaging/blob/master/assets/pollable-queue-channel-schema.png)
+
 ## File Transfer Pattern Project (file-transfer-pattern)
 
 ### Flow

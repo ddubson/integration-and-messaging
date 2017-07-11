@@ -5,6 +5,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 
@@ -16,6 +17,7 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
 @SpringBootApplication
+@ImportResource("integration-context.xml")
 public class PollableChannelsApp implements ApplicationRunner {
     @Autowired
     private PrinterGateway gateway;
