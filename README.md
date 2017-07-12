@@ -56,6 +56,19 @@ Routes based on the recipient filter expression, routes to default channel if no
 
 ![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/filter-custom-filter.png)
 
+### Splitters and Aggregators
+
+#### Basic Splitter
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/basic-splitter.png)
+
+#### Basic Splitter and Aggregator
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/basic-aggregator.png)
+
+#### Custom Aggregator
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/custom-aggregator.png)
 
 ---
 
