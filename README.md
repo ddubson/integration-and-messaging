@@ -46,6 +46,17 @@ Routes based on the recipient filter expression, routes to default channel if no
 
 ![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/recipient-list-router.png)
 
+### Filter
+
+#### Basic Filter
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/filter-basic-filter.png)
+
+#### Custom Filter
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/filter-custom-filter.png)
+
+
 ---
 
 ## File Transfer Pattern Project (file-transfer-pattern)
