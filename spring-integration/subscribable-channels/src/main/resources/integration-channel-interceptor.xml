@@ -16,11 +16,11 @@
         </int:interceptors>
     </int:publish-subscribe-channel>
 
-    <int:gateway service-interface="com.ddubson.PrinterGateway"
+    <int:gateway service-interface="com.ddubson.gateways.PrinterGateway"
                  id="interceptedChannelGateway" default-request-channel="interceptedChannel"/>
 
     <bean class="com.ddubson.CustomChannelInterceptor" id="customChannelInterceptor" />
-    <bean class="com.ddubson.PrintService" id="printService"/>
+    <bean class="com.ddubson.services.PrintService" id="printService"/>
 
     <int:service-activator ref="printService" method="print" input-channel="interceptedChannel"/>
 </beans>

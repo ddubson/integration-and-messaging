@@ -12,10 +12,10 @@
 
     <int:publish-subscribe-channel id="publishSubscribeChannel" task-executor="executor"/>
 
-    <int:gateway service-interface="com.ddubson.PrinterGateway"
+    <int:gateway service-interface="com.ddubson.gateways.PrinterGateway"
                  id="pubSubChannelGateway" default-request-channel="publishSubscribeChannel"/>
 
-    <bean class="com.ddubson.PrintService" id="printService"/>
+    <bean class="com.ddubson.services.PrintService" id="printService"/>
     <bean class="com.ddubson.UppercasePrintService" id="uppercasePrintService"/>
 
     <int:service-activator order="1" ref="printService" id="consumer1" method="print" input-channel="publishSubscribeChannel"/>

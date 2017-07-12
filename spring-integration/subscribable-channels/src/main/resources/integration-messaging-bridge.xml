@@ -20,10 +20,10 @@
     </int:bridge>
 
     <!-- producer -->
-    <int:gateway service-interface="com.ddubson.PrinterGateway"
+    <int:gateway service-interface="com.ddubson.gateways.PrinterGateway"
                  id="pubSubChannelGateway" default-request-channel="bridgedPollableChannel"/>
 
-    <bean class="com.ddubson.PrintService" id="printService"/>
+    <bean class="com.ddubson.services.PrintService" id="printService"/>
     <bean class="com.ddubson.UppercasePrintService" id="uppercasePrintService"/>
 
     <int:service-activator order="1" id="consumer1" ref="printService" method="print" input-channel="bridgedPubSubChannel"/>

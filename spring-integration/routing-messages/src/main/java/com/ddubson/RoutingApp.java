@@ -1,5 +1,6 @@
 package com.ddubson;
 
+import com.ddubson.gateways.PrinterGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationArguments;
@@ -24,11 +25,30 @@ public class RoutingApp implements ApplicationRunner {
     @Qualifier("recipientListGateway")
     private PrinterGateway recipientListGateway;
 
+    @Autowired
+    @Qualifier("customRouterGateway")
+    private PrinterGateway customRouterGateway;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         //payloadTypeRouter();
         //headerValueRouter();
-        recipientListRouter();
+        //recipientListRouter();
+        customRouter();
+    }
+
+    private void customRouter() {
+        printBanner("CUSTOM ROUTER");
+        Stream.iterate(0, n -> n + 1).limit(10).forEach(i -> {
+            Message<?> intMessage = MessageBuilder.withPayload(i).build();
+            Message<String> stringMessage = MessageBuilder.withPayload("Message " + i).build();
+            Message<?> floatMessage = MessageBuilder.withPayload(i+2.5).build();
+            this.customRouterGateway.print(intMessage);
+            this.customRouterGateway.print(stringMessage);
+            this.customRouterGateway.print(floatMessage);
+        });
+
+        printBanner("END CUSTOM ROUTER");
     }
 
     private void recipientListRouter() {

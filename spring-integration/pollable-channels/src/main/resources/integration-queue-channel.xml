@@ -9,9 +9,9 @@
         <int:queue capacity="10" />
     </int:channel>
 
-    <int:gateway id="gateway" service-interface="com.ddubson.PrinterGateway" default-request-channel="inputChannel" />
+    <int:gateway id="gateway" service-interface="com.ddubson.gateways.PrinterGateway" default-request-channel="inputChannel" />
 
-    <bean class="com.ddubson.PrintService" id="printService"/>
+    <bean class="com.ddubson.services.PrintService" id="printService"/>
 
     <int:service-activator id="serviceActivator" ref="printService" method="print"
                            input-channel="inputChannel">

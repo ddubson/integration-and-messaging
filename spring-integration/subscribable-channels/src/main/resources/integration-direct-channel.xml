@@ -10,10 +10,10 @@
 
     <!-- Gateway -->
     <int:gateway id="directChannelGateway"
-                 service-interface="com.ddubson.PrinterGateway"
+                 service-interface="com.ddubson.gateways.PrinterGateway"
                  default-request-channel="inputChannel" />
 
-    <bean class="com.ddubson.PrintService" id="printService"/>
+    <bean class="com.ddubson.services.PrintService" id="printService"/>
     <bean class="com.ddubson.UppercasePrintService" id="uppercasePrintService"/>
 
     <!-- Consumer Endpoints -->

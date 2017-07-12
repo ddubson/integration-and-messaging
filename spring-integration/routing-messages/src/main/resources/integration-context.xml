@@ -7,4 +7,5 @@
     <import resource="integration-payload-type-router.xml"/>
     <import resource="integration-header-value-router.xml"/>
     <import resource="integration-recipient-list.xml"/>
+    <import resource="integration-custom-router.xml"/>
 </beans>
