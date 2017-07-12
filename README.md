@@ -70,6 +70,16 @@ Routes based on the recipient filter expression, routes to default channel if no
 
 ![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/custom-aggregator.png)
 
+### Transformers
+
+#### Basic Transformer
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/basic-transformer.png)
+
+#### Custom Transformer
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/custom-transformer.png)
+
 ---
 
 ## File Transfer Pattern Project (file-transfer-pattern)
