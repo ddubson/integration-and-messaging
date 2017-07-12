@@ -34,12 +34,17 @@ Input Channel -> Service Activator (Endpoint) -> Output Channel
 
 ### Router
 
-#### Payload Type Router
+#### Type and Value Routers
 
-Routes based on the type of payload enclosed in Message
+Routes based on the type of payload or header value enclosed in Message (Payload Type, Header Value)
 
 ![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/router-payload-type.png)
 
+#### Recipient List Router
+
+Routes based on the recipient filter expression, routes to default channel if no match.
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/recipient-list-router.png)
 
 ---
 
