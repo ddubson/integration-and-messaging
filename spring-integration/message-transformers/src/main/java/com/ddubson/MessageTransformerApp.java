@@ -26,10 +26,63 @@ public class MessageTransformerApp implements ApplicationRunner {
     @Qualifier("customTransformerGateway")
     private PrinterGateway customTransformerGateway;
 
+    @Autowired
+    @Qualifier("gateway3")
+    private PrinterGateway filterHeaderGateway;
+
+    @Autowired
+    @Qualifier("gateway4")
+    private PrinterGateway headerEnricherGateway;
+
+    @Autowired
+    @Qualifier("gateway5")
+    private PrinterGateway payloadEnricherGateway;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        basicTransformer();
+        //basicTransformer();
         //customTransformer();
+        //filteringHeaders();
+        //headerEnricher();
+        payloadEnricher();
+    }
+
+    private void payloadEnricher() {
+        printBanner("PAYLOAD ENRICHER");
+        Stream.iterate(0, n -> n + 1).limit(3).forEach(i -> {
+            Message<?> intMessage = MessageBuilder
+                    .withPayload(new Person("John", "Doe"))
+                    .build();
+            this.payloadEnricherGateway.print(intMessage);
+        });
+
+        printBanner("END PAYLOAD ENRICHER");
+    }
+
+    private void headerEnricher() {
+        printBanner("HEADER ENRICHER");
+        Stream.iterate(0, n -> n + 1).limit(3).forEach(i -> {
+            Message<?> intMessage = MessageBuilder
+                    .withPayload("Hello World")
+                    .setHeader("privateKey", "12345")
+                    .build();
+            this.headerEnricherGateway.print(intMessage);
+        });
+
+        printBanner("END HEADER ENRICHER");
+    }
+
+    private void filteringHeaders() {
+        printBanner("FILTERING HEADERS");
+        Stream.iterate(0, n -> n + 1).limit(3).forEach(i -> {
+            Message<?> intMessage = MessageBuilder
+                    .withPayload("Hello World")
+                    .setHeader("privateKey", "12345")
+                    .build();
+            this.filterHeaderGateway.print(intMessage);
+        });
+
+        printBanner("END FILTERING HEADERS");
     }
 
     private void customTransformer() {

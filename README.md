@@ -74,11 +74,33 @@ Routes based on the recipient filter expression, routes to default channel if no
 
 #### Basic Transformer
 
+Create a simple transformation inline (SpEL expression based)
+
 ![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/basic-transformer.png)
 
 #### Custom Transformer
 
+Custom transform function based on an external service
+
 ![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/custom-transformer.png)
+
+#### Filtering Headers
+
+Filter headers for each message on a message channel 
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/filtering-headers.png)
+
+#### Header Enricher
+
+Add headers for each message on a message channel
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/header-enricher.png)
+
+#### Payload Enricher
+
+Add more data per each message on a channel
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/payload-enricher.png)
 
 ---
 

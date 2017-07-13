@@ -6,5 +6,6 @@ public class StringPrintService implements PrintService {
     @Override
     public void print(Message<String> msg) {
         System.out.format("[%s] %s\n", Thread.currentThread().getName(), msg.getPayload());
+        msg.getHeaders().forEach((k,v)-> System.out.println(k+":"+v));
     }
 }

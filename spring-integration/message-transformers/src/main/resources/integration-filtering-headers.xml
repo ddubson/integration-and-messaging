@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
+    <int:gateway service-interface="com.ddubson.gateways.PrinterGateway"
+                 id="gateway3"
+                 default-request-channel="inputChannel3"/>
+
+    <int:channel id="inputChannel3"/>
+    <int:channel id="outputChannel3"/>
+
+    <int:header-filter id="headerFilter3" 
+     				  input-channel="inputChannel3"
+                       output-channel="outputChannel3"
+                       header-names="privateKey" />
+
+    <bean id="stringPrintService" class="com.ddubson.services.StringPrintService"/>
+
+    <int:service-activator id="fStringPrint" ref="stringPrintService" method="print" input-channel="outputChannel3"/>
+</beans>
