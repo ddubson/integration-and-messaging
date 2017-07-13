@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
+    <int:gateway service-interface="com.ddubson.gateways.EnhancedPrinterGateway"
+                 id="gateway2">
+        <int:method name="print" request-channel="printChannel"/>
+        <int:method name="uppercase" request-channel="uppercaseChannel"/>
+    </int:gateway>
+
+    <int:channel id="printChannel"/>
+    <int:channel id="uppercaseChannel"/>
+
+    <int:service-activator id="uppercaseServiceRef2"
+                           ref="uppercaseStringService"
+                           method="execute"
+                           input-channel="uppercaseChannel"/>
+    <int:service-activator id="stringPrint2"
+                           ref="stringPrintService"
+                           method="print"
+                           input-channel="printChannel"/>
+
+    <bean id="stringPrintService" class="com.ddubson.services.StringPrintService"/>
+    <bean id="uppercaseStringService" class="com.ddubson.services.UppercaseStringService"/>
+</beans>

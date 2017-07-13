@@ -102,6 +102,14 @@ Add more data per each message on a channel
 
 ![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/payload-enricher.png)
 
+### Processing Endpoints
+
+#### Gateways
+
+Gateways can take in raw POJOs and process them.
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/gateways-1.png)
+
 ---
 
 ## File Transfer Pattern Project (file-transfer-pattern)
