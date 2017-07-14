@@ -8,3 +8,5 @@ classes/
 .project
 .settings/
 bin/
+
+assets/write/*

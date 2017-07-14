@@ -59,6 +59,7 @@ configure(subprojects.findAll { it.path.startsWith(':spring-integration') }) {
     dependencies {
         compile project(":commons")
         compile "org.springframework.integration:spring-integration-core:${springVersion}"
+        compile "org.springframework.integration:spring-integration-file:${springVersion}"
         compile "com.fasterxml.jackson.core:jackson-core:2.9"
         compile 'com.fasterxml.jackson.core:jackson-databind:2.9.0.pr4'
     }

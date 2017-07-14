@@ -122,6 +122,28 @@ Inbound adapters receive information from external systems, outbound adapters pu
 
 ![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/inbound-outbound-adapters-1.png)
 
+### File System Integrations
+
+#### Reading Files
+
+Reading from file system
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/reading-files-1.png)
+
+#### Writing Files
+
+Writing files to the file system
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/writing-files-1.png)
+
+#### Transforming Files
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/transforming-files-1.png)
+
+#### Outbound Gateway
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/outbound-gateway-1.png)
+
 ---
 
 ## File Transfer Pattern Project (file-transfer-pattern)
