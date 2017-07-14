@@ -110,6 +110,18 @@ Gateways can take in raw POJOs and process them.
 
 ![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/gateways-1.png)
 
+#### Service Activators
+
+Service Activators are endpoints at which data is handled or proxied.
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/service-activators-1.png)
+
+#### Inbound/Outbound Channel Adapters
+
+Inbound adapters receive information from external systems, outbound adapters push data to external systems.
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/inbound-outbound-adapters-1.png)
+
 ---
 
 ## File Transfer Pattern Project (file-transfer-pattern)

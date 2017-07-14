@@ -34,7 +34,12 @@ public class ProcessEndpointsApp implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         //serviceActivator();
-        gateways();
+        //gateways();
+        inboundGateway();
+    }
+
+    private void inboundGateway() {
+        // Done automatically;
     }
 
     private void gateways() {

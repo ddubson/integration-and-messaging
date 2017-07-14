@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
+
+    <int:channel id="registerChannel"/>
+    <bean id="personDirectoryService" class="com.ddubson.services.PersonDirectoryService"/>
+    <bean id="personRegistrationService" class="com.ddubson.services.PersonRegistrationService"/>
+
+    <!-- brings messages to messaging system from external system -->
+    <int:inbound-channel-adapter id="channelAdapter"
+                                 ref="personDirectoryService"
+                                 method="findNewPeople"
+                                 channel="registerChannel">
+        <!-- poll directory service every 3 seconds -->
+        <int:poller fixed-rate="3000"/>
+    </int:inbound-channel-adapter>
+
+    <int:outbound-channel-adapter ref="personRegistrationService"
+                                  id="outboundAdapter"
+                                  method="registerEmail"
+                                  channel="registerChannel">
+    </int:outbound-channel-adapter>
+
+</beans>
