@@ -1,11 +1,10 @@
 package com.ddubson.gateways;
 
 import com.ddubson.Person;
-
-import java.util.concurrent.Future;
+import org.springframework.util.concurrent.ListenableFuture;
 
 public interface EnhancedPrinterGateway {
-    Future<Void> print(Person person);
+    ListenableFuture<Void> print(Person person);
 
-    Future<String> uppercase(Person person);
+    ListenableFuture<String> uppercase(Person person);
 }

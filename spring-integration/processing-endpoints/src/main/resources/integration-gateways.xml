@@ -6,7 +6,11 @@
             http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
     <int:gateway service-interface="com.ddubson.gateways.EnhancedPrinterGateway"
                  id="gateway2">
-        <int:method name="print" request-channel="printChannel"/>
+        <int:default-header name="globalHeader" value="simpleValue"/>
+        <int:method name="print" request-channel="printChannel">
+            <!-- args[] refers to args to the print method -->
+            <int:header name="individualHeader" expression="#args[0].firstName" />
+        </int:method>
         <int:method name="uppercase" request-channel="uppercaseChannel"/>
     </int:gateway>
 

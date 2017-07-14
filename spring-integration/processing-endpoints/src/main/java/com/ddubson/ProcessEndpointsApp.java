@@ -11,10 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.util.concurrent.ListenableFuture;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 import java.util.stream.Stream;
 
 import static com.ddubson.ConsolePrinterUtils.printBanner;
@@ -40,14 +40,20 @@ public class ProcessEndpointsApp implements ApplicationRunner {
     private void gateways() {
         printBanner("GATEWAYS");
         Stream.iterate(0, n -> n + 1).limit(3).forEach(i -> {
-            this.enhancedPrinterGateway.print(new Person("Shane","Doe"));
+            this.enhancedPrinterGateway.print(new Person("Shane", "Doe"));
         });
 
-        List<Future<String>> futures = Stream
+        List<ListenableFuture<String>> futures = Stream
                 .iterate(0, n -> n + 1)
                 .limit(3)
-                .map(i -> this.enhancedPrinterGateway.uppercase(new Person("John","Doe")))
-                .collect(toList());
+                .map(i -> this.enhancedPrinterGateway.uppercase(new Person("John", "Doe")))
+                .map(future -> {
+                    future.addCallback(
+                            (result) -> System.out.println("Invoking success callback."),
+                            (ex) -> {
+                            });
+                    return future;
+                }).collect(toList());
 
         futures.forEach(f -> {
             try {
@@ -58,6 +64,7 @@ public class ProcessEndpointsApp implements ApplicationRunner {
         });
 
         printBanner("END GATEWAYS");
+
     }
 
     private void serviceActivator() {
