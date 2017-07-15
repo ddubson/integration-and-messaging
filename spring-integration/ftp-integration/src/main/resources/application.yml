@@ -5,3 +5,8 @@ logging:
 spring:
   main:
     banner-mode: "off"
+ftp:
+  host: localhost
+  port: 21
+  username: ${user.name}
+  password: ${user.password}

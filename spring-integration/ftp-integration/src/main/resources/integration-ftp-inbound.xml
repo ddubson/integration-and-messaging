@@ -3,13 +3,38 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:int="http://www.springframework.org/schema/integration"
        xmlns:int-file="http://www.springframework.org/schema/integration/file"
+       xmlns:int-ftp="http://www.springframework.org/schema/integration/ftp"
        xsi:schemaLocation="
             http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/integration
             http://www.springframework.org/schema/integration/spring-integration.xsd
             http://www.springframework.org/schema/integration/file
-            http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
+            http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
+            http://www.springframework.org/schema/integration/ftp
+            http://www.springframework.org/schema/integration/ftp/spring-integration-ftp.xsd">
 
+    <bean id="ftpClientFactory" class="org.springframework.integration.ftp.session.DefaultFtpSessionFactory">
+        <property name="host" value="${ftp.host}" />
+        <property name="port" value="${ftp.port}" />
+        <property name="username" value="${ftp.username}" />
+        <property name="password" value="${ftp.password}" />
+    </bean>
+    
+    <int-ftp:inbound-channel-adapter session-factory="ftpClientFactory"
+                                     local-directory="file:assets/write"
+                                     remote-directory="ftp/shared/files"
+                                     channel="ftpChannel"
+                                     delete-remote-files="true">
+        <int:poller fixed-rate="5000" />
+    </int-ftp:inbound-channel-adapter>
 
+    <int:channel id="ftpChannel" />
+
+    <bean id="filePrinter" class="com.ddubson.FilePrinter"/>
+
+    <int:service-activator id="endpoint"
+                           ref="filePrinter"
+                           method="print"
+                           input-channel="ftpChannel"/>
 </beans>
