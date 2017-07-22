@@ -5,4 +5,6 @@
        http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
     <import resource="integration-ftp-inbound.xml"/>
+    <import resource="integration-ftp-outbound.xml"/>
+    <import resource="integration-ftp-outbound-gateway.xml"/>
 </beans>

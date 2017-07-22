@@ -19,7 +19,7 @@
 
     <int:channel id="inboundChannel"/>
 
-    <bean id="filePrinter" class="com.ddubson.FilePrinter"/>
+    <bean id="filePrinter" class="com.ddubson.printers.FilePrinter"/>
 
     <int:service-activator id="endpoint"
                            ref="filePrinter"

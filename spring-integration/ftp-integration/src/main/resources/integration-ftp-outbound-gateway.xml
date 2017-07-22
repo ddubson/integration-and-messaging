@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-file="http://www.springframework.org/schema/integration/file"
+       xmlns:int-ftp="http://www.springframework.org/schema/integration/ftp"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration
+            http://www.springframework.org/schema/integration/spring-integration.xsd
+            http://www.springframework.org/schema/integration/file
+            http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
+            http://www.springframework.org/schema/integration/ftp
+            http://www.springframework.org/schema/integration/ftp/spring-integration-ftp.xsd">
+    <int:gateway id="gateway3"
+                 service-interface="com.ddubson.FileWriterGateway"
+                 default-request-channel="ftpChannel3"/>
+
+    <int-ftp:outbound-gateway id="outboundGateway"
+                              session-factory="ftpClientFactory"
+                              command="get"
+                              expression="payload"
+                              request-channel="ftpChannel3"
+                              local-directory="assets/write"
+                              reply-channel="outboundChannel"/>
+
+    <int:channel id="ftpChannel3"/>
+    <int:channel id="outboundChannel"/>
+    <int:channel id="transformChannel"/>
+    <int-file:file-to-string-transformer id="fileToStringTransformer"
+                                         input-channel="outboundChannel"
+                                         output-channel="transformChannel"/>
+
+    <bean id="messagePrinter" class="com.ddubson.printers.MessagePrinter"/>
+
+    <int:service-activator id="messagePrinterRef"
+                           ref="messagePrinter"
+                           method="print"
+                           input-channel="transformChannel"/>
+</beans>

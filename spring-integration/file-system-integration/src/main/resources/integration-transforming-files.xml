@@ -24,5 +24,5 @@
     <int-file:file-to-string-transformer id="fileTransformer" input-channel="inboundChannel" output-channel="transformerChannel" />
 
     <int:service-activator id="filePrinterEndpoint" ref="filePrinter" method="print" input-channel="transformerChannel" />
-    <bean id="filePrinter" class="com.ddubson.FilePrinter" />
+    <bean id="filePrinter" class="com.ddubson.printers.FilePrinter" />
 </beans>

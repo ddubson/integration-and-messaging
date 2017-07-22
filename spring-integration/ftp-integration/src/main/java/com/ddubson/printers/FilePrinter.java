@@ -1,4 +1,4 @@
-package com.ddubson;
+package com.ddubson.printers;
 
 import java.io.*;
 

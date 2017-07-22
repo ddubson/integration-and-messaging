@@ -32,5 +32,5 @@
     />
 
     <int:service-activator id="filePrinterEndpoint" ref="filePrinter" method="print" input-channel="outboundChannel"/>
-    <bean id="filePrinter" class="com.ddubson.FilePrinter"/>
+    <bean id="filePrinter" class="com.ddubson.printers.FilePrinter"/>
 </beans>

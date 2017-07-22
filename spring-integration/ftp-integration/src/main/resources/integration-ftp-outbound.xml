@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-file="http://www.springframework.org/schema/integration/file"
+       xmlns:int-ftp="http://www.springframework.org/schema/integration/ftp"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration
+            http://www.springframework.org/schema/integration/spring-integration.xsd
+            http://www.springframework.org/schema/integration/file
+            http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
+            http://www.springframework.org/schema/integration/ftp
+            http://www.springframework.org/schema/integration/ftp/spring-integration-ftp.xsd">
+    <int:gateway id="gateway2"
+                 service-interface="com.ddubson.FileWriterGateway"
+                 default-request-channel="ftpChannel2"/>
+
+    <int-ftp:outbound-channel-adapter id="outboundChannelAdapter"
+                                      session-factory="ftpClientFactory"
+                                      channel="ftpChannel2"
+                                      remote-directory="ftp/shared/files"
+                                      remote-filename-generator-expression="headers['fileName']"/>
+
+    <int:channel id="ftpChannel2"/>
+</beans>

@@ -15,25 +15,26 @@
             http://www.springframework.org/schema/integration/ftp/spring-integration-ftp.xsd">
 
     <bean id="ftpClientFactory" class="org.springframework.integration.ftp.session.DefaultFtpSessionFactory">
-        <property name="host" value="${ftp.host}" />
-        <property name="port" value="${ftp.port}" />
-        <property name="username" value="${ftp.username}" />
-        <property name="password" value="${ftp.password}" />
+        <property name="host" value="${ftp.host}"/>
+        <property name="port" value="${ftp.port}"/>
+        <property name="username" value="${ftp.username}"/>
+        <property name="password" value="${ftp.password}"/>
     </bean>
-    
-    <int-ftp:inbound-channel-adapter session-factory="ftpClientFactory"
+
+    <int-ftp:inbound-channel-adapter id="inboundChannelAdapter"
+                                     session-factory="ftpClientFactory"
                                      local-directory="file:assets/write"
                                      remote-directory="ftp/shared/files"
                                      channel="ftpChannel"
                                      delete-remote-files="true">
-        <int:poller fixed-rate="5000" />
+        <int:poller fixed-rate="5000"/>
     </int-ftp:inbound-channel-adapter>
 
-    <int:channel id="ftpChannel" />
+    <int:channel id="ftpChannel"/>
 
-    <bean id="filePrinter" class="com.ddubson.FilePrinter"/>
+    <bean id="filePrinter" class="com.ddubson.printers.FilePrinter"/>
 
-    <int:service-activator id="endpoint"
+    <int:service-activator id="filePrinterRef"
                            ref="filePrinter"
                            method="print"
                            input-channel="ftpChannel"/>

@@ -144,6 +144,20 @@ Writing files to the file system
 
 ![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/outbound-gateway-1.png)
 
+### FTP Integrations
+
+#### Inbound Channel Adapters
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/ftp-1.png)
+
+#### Outbound Channel Adapters
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/ftp-2.png)
+
+#### Outbound Gateways
+
+![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/ftp-3.png)
+
 ---
 
 ## File Transfer Pattern Project (file-transfer-pattern)
