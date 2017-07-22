@@ -1,0 +1,8 @@
+logging:
+  level:
+    root: WARN
+    org.springframework.integration: WARN
+    org.springframework.jdbc: INFO
+spring:
+  main:
+    banner-mode: "off"
