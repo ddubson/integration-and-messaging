@@ -5,4 +5,5 @@ create table person (
 );
 
 insert into person(person_id, first_name, last_name)
-    VALUES (1, 'Dmitriy', 'Dubson');
+  VALUES (1, 'Dmitriy', 'Dubson'),
+         (2, 'John', 'Doe');

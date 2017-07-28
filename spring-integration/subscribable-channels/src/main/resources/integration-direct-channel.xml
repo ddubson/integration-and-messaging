@@ -14,7 +14,7 @@
                  default-request-channel="inputChannel" />
 
     <bean class="com.ddubson.services.PrintService" id="printService"/>
-    <bean class="com.ddubson.UppercasePrintService" id="uppercasePrintService"/>
+    <bean class="com.ddubson.services.UppercasePrintService" id="uppercasePrintService"/>
 
     <!-- Consumer Endpoints -->
     <int:service-activator order="1" ref="printService" method="print" id="consumer1" input-channel="inputChannel"/>

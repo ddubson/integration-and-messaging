@@ -4,5 +4,7 @@
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <import resource="integration-inbound-channel-adapter.xml"/>
+    <!--<import resource="integration-inbound-channel-adapter.xml"/>-->
+    <!--<import resource="integration-outbound-channel-adapter.xml"/>-->
+    <import resource="integration-outbound-gateway.xml"/>
 </beans>

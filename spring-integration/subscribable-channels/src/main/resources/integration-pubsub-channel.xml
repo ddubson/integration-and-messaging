@@ -16,7 +16,7 @@
                  id="pubSubChannelGateway" default-request-channel="publishSubscribeChannel"/>
 
     <bean class="com.ddubson.services.PrintService" id="printService"/>
-    <bean class="com.ddubson.UppercasePrintService" id="uppercasePrintService"/>
+    <bean class="com.ddubson.services.UppercasePrintService" id="uppercasePrintService"/>
 
     <int:service-activator order="1" ref="printService" id="consumer1" method="print" input-channel="publishSubscribeChannel"/>
     <int:service-activator order="2" ref="uppercasePrintService" id="consumer2" method="print"

@@ -10,17 +10,15 @@
             http://www.springframework.org/schema/integration/spring-integration.xsd
             http://www.springframework.org/schema/integration/jdbc
             http://www.springframework.org/schema/integration/jdbc/spring-integration-jdbc.xsd">
-    <import resource="data-source.xml" />
+    <import resource="data-source.xml"/>
 
-    <int-jdbc:inbound-channel-adapter id="inboundChannelAdapter"
-                                      channel="jdbcChannel"
-                                      query="select * from person"
-                                      data-source="dataSource">
-        <int:poller fixed-rate="4000"/>
-    </int-jdbc:inbound-channel-adapter>
-    <int:channel id="jdbcChannel"/>
+    <int:gateway id="personGateway"
+                 service-interface="com.ddubson.PersonGateway"
+                 default-request-channel="inboundChannel"></int:gateway>
 
-    <int:service-activator ref="messagePrinter" method="print" input-channel="jdbcChannel"/>
+    <int-jdbc:outbound-channel-adapter channel="inboundChannel"
+                                       data-source="dataSource"
+                                       query="insert into person values(:payload.id,:payload.firstName,:payload.lastName)"/>
 
-    <bean id="messagePrinter" class="com.ddubson.MessagePrinter"/>
+    <int:channel id="inboundChannel"/>
 </beans>
