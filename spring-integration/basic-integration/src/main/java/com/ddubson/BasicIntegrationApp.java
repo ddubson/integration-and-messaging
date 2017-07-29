@@ -29,13 +29,20 @@ public class BasicIntegrationApp implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        // via Constructor
         Message<String> message = new GenericMessage<>("Hello World", createMessageHeaders());
+
+        // via MessageBuilder
         Message<String> message2 = MessageBuilder
                 .withPayload("Hello World (Builder Pattern)")
                 .setHeader("newKey", "newValue")
                 .build();
 
-        outputChannel.subscribe((System.out::println));
+        // Add message handlers to output channel
+        outputChannel.subscribe((msg) -> System.out.println("[3] Output channel received: " + msg));
+        outputChannel.subscribe((msg) -> System.out.println("[4] Output channel received: " + msg));
+
+        System.out.println("[1] Send two messages into input channel.");
         inputChannel.send(message);
         inputChannel.send(message2);
     }
