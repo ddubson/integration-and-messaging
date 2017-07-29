@@ -62,6 +62,8 @@ configure(subprojects.findAll { it.path.startsWith(':spring-integration') }) {
         compile "org.springframework.integration:spring-integration-file:${springVersion}"
         compile "org.springframework.integration:spring-integration-ftp:${springVersion}"
         compile "org.springframework.integration:spring-integration-jdbc:${springVersion}"
+        compile "org.springframework.integration:spring-integration-jms:${springVersion}"
+        compile "org.apache.activemq:activemq-client:${activeMQClientVersion}"
         compile "com.fasterxml.jackson.core:jackson-core:2.9"
         compile 'com.fasterxml.jackson.core:jackson-databind:2.9.0.pr4'
         compile "com.h2database:h2:1.4.196"

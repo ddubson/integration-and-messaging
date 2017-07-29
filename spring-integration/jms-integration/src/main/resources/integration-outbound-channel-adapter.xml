@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration
+            http://www.springframework.org/schema/integration/spring-integration.xsd
+            http://www.springframework.org/schema/integration/jms
+            http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd">
+    <bean id="activeMqConnFactory"
+          class="org.springframework.jms.connection.CachingConnectionFactory">
+        <property name="targetConnectionFactory">
+            <bean class="org.apache.activemq.ActiveMQConnectionFactory">
+                <property name="brokerURL" value="tcp://localhost:61616"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="queue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="sample.queue"/>
+    </bean>
+
+    <int:object-to-string-transformer input-channel="inboundChannel" output-channel="outboundChannel" />
+
+    <int-jms:outbound-channel-adapter id="outboundAdapter"
+                                      connection-factory="activeMqConnFactory"
+                                      channel="outboundChannel"
+                                      destination="queue"/>
+
+    <int:gateway id="personGateway"
+                 service-interface="com.ddubson.PersonGateway"
+                 default-request-channel="inboundChannel"/>
+
+    <int:service-activator id="mp"
+                           ref="messagePrinter"
+                           method="print"
+                           input-channel="jmsChannel"/>
+
+    <int:channel id="jmsChannel"/>
+    <int:channel id="inboundChannel"/>
+    <int:channel id="outboundChannel"/>
+
+    <bean id="messagePrinter" class="com.ddubson.MessagePrinter"/>
+</beans>

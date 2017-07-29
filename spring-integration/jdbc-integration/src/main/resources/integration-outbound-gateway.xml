@@ -14,14 +14,14 @@
 
     <int:gateway id="personGateway"
                  service-interface="com.ddubson.PersonGateway"
-                 default-request-channel="inboundChannel"></int:gateway>
+                 default-request-channel="inboundChannel"/>
 
     <int-jdbc:outbound-gateway id="outboundGateway"
                                request-channel="inboundChannel"
                                data-source="dataSource"
                                update="insert into person values(:payload.id,:payload.firstName,:payload.lastName)"
                                query="select * from person where person_id = :payload.id"
-                               reply-channel="jdbcChannel" />
+                               reply-channel="jdbcChannel"/>
 
     <int:channel id="inboundChannel"/>
     <int:channel id="jdbcChannel"/>
