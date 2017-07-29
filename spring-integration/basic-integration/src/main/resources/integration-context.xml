@@ -8,7 +8,7 @@
     <int:channel id="inputChannel"/>
     <int:channel id="outputChannel"/>
 
-    <bean class="com.ddubson.PrintService" id="printService"/>
+    <bean class="com.ddubson.integration.PrintService" id="printService"/>
 
     <int:service-activator id="serviceActivator"
                            ref="printService" method="print"

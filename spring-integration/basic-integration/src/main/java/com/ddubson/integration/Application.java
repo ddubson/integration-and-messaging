@@ -1,11 +1,14 @@
-package com.ddubson;
+package com.ddubson.integration;
 
+import com.ddubson.CommandLineLogAdapter;
+import com.ddubson.LogAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.messaging.Message;
@@ -16,9 +19,11 @@ import org.springframework.messaging.support.MessageBuilder;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.ddubson.ANSIColor.*;
+
 @SpringBootApplication
 @ImportResource("integration-context.xml")
-public class BasicIntegrationApp implements ApplicationRunner {
+public class Application implements ApplicationRunner {
     @Autowired
     @Qualifier("inputChannel")
     private DirectChannel inputChannel;
@@ -26,6 +31,9 @@ public class BasicIntegrationApp implements ApplicationRunner {
     @Autowired
     @Qualifier("outputChannel")
     private DirectChannel outputChannel;
+
+    @Autowired
+    LogAdapter logAdapter;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -39,12 +47,17 @@ public class BasicIntegrationApp implements ApplicationRunner {
                 .build();
 
         // Add message handlers to output channel
-        outputChannel.subscribe((msg) -> System.out.println("[3] Output channel received: " + msg));
-        outputChannel.subscribe((msg) -> System.out.println("[4] Output channel received: " + msg));
+        outputChannel.subscribe((msg) -> logAdapter.info("[3] Output channel received: " + msg, ANSI_BLUE));
+        outputChannel.subscribe((msg) -> logAdapter.info("[4] Output channel received: " + msg, ANSI_BLUE));
 
-        System.out.println("[1] Send two messages into input channel.");
+        logAdapter.info("[1] Send two messages into input channel.", ANSI_RED);
         inputChannel.send(message);
         inputChannel.send(message2);
+    }
+
+    @Bean
+    public LogAdapter logAdapter() {
+        return new CommandLineLogAdapter();
     }
 
     private MessageHeaders createMessageHeaders() {
@@ -54,6 +67,6 @@ public class BasicIntegrationApp implements ApplicationRunner {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(BasicIntegrationApp.class, args);
+        SpringApplication.run(Application.class, args);
     }
 }

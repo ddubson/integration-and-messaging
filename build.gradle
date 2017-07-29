@@ -1,6 +1,6 @@
 ext {
     springVersion = "4.3.9.RELEASE"
-    springBootVersion = "1.5.4.RELEASE"
+    springBootVersion = "1.5.6.RELEASE"
     camelVersion = "2.18.1"
     activeMQClientVersion = "5.14.1"
 }
@@ -11,8 +11,20 @@ version '1.0'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.6.RELEASE")
+    }
+}
+
 subprojects {
+
+
     apply plugin: "java"
+    apply plugin: "org.springframework.boot"
 
     repositories {
         mavenCentral()
@@ -64,9 +76,11 @@ configure(subprojects.findAll { it.path.startsWith(':spring-integration') }) {
         compile "org.springframework.integration:spring-integration-jdbc:${springVersion}"
         compile "org.springframework.integration:spring-integration-jms:${springVersion}"
         compile "org.apache.activemq:activemq-client:${activeMQClientVersion}"
-        compile "com.fasterxml.jackson.core:jackson-core:2.9"
-        compile 'com.fasterxml.jackson.core:jackson-databind:2.9.0.pr4'
+        compile "com.fasterxml.jackson.core:jackson-core:2.9.0.pr4"
+        compile "com.fasterxml.jackson.core:jackson-databind:2.9.0.pr4"
         compile "com.h2database:h2:1.4.196"
         compile "org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}"
     }
+
+    mainClassName = "com.ddubson.integration.Application"
 }
