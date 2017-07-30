@@ -3,6 +3,7 @@ include 'commons', 'spring-amqp-rabbitmq', 'file-transfer-pattern' , 'spring-jms
 include 'spring-integration:basic-integration'
 include 'spring-integration:subscribable-channels'
 include 'spring-integration:subscribable-channels:direct-channel'
+include 'spring-integration:subscribable-channels:pubsub-channel'
 include 'spring-integration:pollable-channels'
 include 'spring-integration:routing-messages'
 include 'spring-integration:filtering-messages'

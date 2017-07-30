@@ -24,7 +24,4 @@
                            ref="uppercasePrintService"
                            method="print"
                            input-channel="inputChannel"/>
-
-    <bean class="com.ddubson.integration.services.PrintService" id="printService"/>
-    <bean class="com.ddubson.integration.services.UppercasePrintService" id="uppercasePrintService"/>
 </beans>

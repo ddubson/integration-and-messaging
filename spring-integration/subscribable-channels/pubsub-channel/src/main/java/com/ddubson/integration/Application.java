@@ -1,6 +1,5 @@
 package com.ddubson.integration;
 
-
 import com.ddubson.CommandLineLogAdapter;
 import com.ddubson.LogAdapter;
 import com.ddubson.integration.gateways.PrinterGateway;
@@ -11,8 +10,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 
 import java.util.stream.Stream;
 
@@ -24,16 +23,16 @@ public class Application implements ApplicationRunner {
     private int numberOfMessages = 10;
 
     @Autowired
-    private PrinterGateway directChannelGateway;
+    private PrinterGateway pubSubChannelGateway;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        logAdapter().info("[1] Subscribable Round-Robin Direct Channel", ANSI_WHITE);
+        logAdapter().info("[1] Subcribable Pub-Sub Channel", ANSI_WHITE);
+
         Stream.iterate(0, n -> n + 1).limit(numberOfMessages).forEach(i -> {
-            Message<String> message = MessageBuilder.withPayload("Message " + i)
-                    .build();
+            Message<String> message = MessageBuilder.withPayload("Message " + i).build();
             logAdapter().info("[1] Sending message " + i + " to input channel.", ANSI_WHITE);
-            this.directChannelGateway.print(message);
+            this.pubSubChannelGateway.print(message);
         });
     }
 

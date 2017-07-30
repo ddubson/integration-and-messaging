@@ -17,7 +17,7 @@ public class UppercasePrintService {
 
     public void print(Message<String> msg) {
         logAdapter.info(
-                format("[2] Consuming input channel -- [%s] %s", Thread.currentThread().getName(),
-                        msg.getPayload().toUpperCase()), ANSIColor.ANSI_GREEN);
+                format("[2] Consuming pub-sub channel -- [%s] %s", Thread.currentThread().getName(),
+                        msg.getPayload().toUpperCase()), ANSIColor.ANSI_CYAN);
     }
 }
