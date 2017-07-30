@@ -6,9 +6,8 @@
             http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
 
     <int:channel id="inputChannel"/>
-    <int:channel id="outputChannel"/>
 
-    <bean class="com.ddubson.integration.PrintService" id="printService"/>
+    <int:channel id="outputChannel"/>
 
     <int:service-activator id="serviceActivator"
                            ref="printService" method="print"

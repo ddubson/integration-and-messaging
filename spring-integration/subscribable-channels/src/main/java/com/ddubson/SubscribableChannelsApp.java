@@ -19,16 +19,11 @@ import static com.ddubson.ConsolePrinterUtils.printBanner;
 @ImportResource("integration-context.xml")
 public class SubscribableChannelsApp implements ApplicationRunner {
     @Autowired
-    @Qualifier("pubSubChannelGateway")
-    private PrinterGateway pubSubChannelGateway;
-
-    @Autowired
     @Qualifier("interceptedChannelGateway")
     private PrinterGateway interceptedChannelGateway;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        //messagingBridgeBetweenPollableAndSubscribableChannels();
         channelInterceptor();
     }
 
@@ -41,17 +36,6 @@ public class SubscribableChannelsApp implements ApplicationRunner {
         });
 
         printBanner("END SUBSCRIBABLE CHANNEL INTERCEPTOR CHANNEL");
-    }
-
-    private void messagingBridgeBetweenPollableAndSubscribableChannels() {
-        printBanner("BRIDGED CHANNEL");
-        Stream.iterate(0, n -> n + 1).limit(10).forEach(i -> {
-            Message<String> message = MessageBuilder.withPayload("[BRIDGED] Message " + i)
-                    .build();
-            this.pubSubChannelGateway.print(message);
-        });
-
-        printBanner("END BRIDGED CHANNEL");
     }
 
     public static void main(String[] args) {
