@@ -11,17 +11,16 @@
             http://www.springframework.org/schema/integration/file
             http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
 
-    <int-file:inbound-channel-adapter id="inboundFileAdapter2"
-    									 directory="file:assets/read"
-                                      filename-pattern="sample.txt"
+    <int-file:inbound-channel-adapter id="inboundFileAdapter"
+                                      directory="file:assets/read"
+                                      filename-pattern="*.txt"
                                       channel="inboundChannel">
-        <int:poller fixed-rate="3000"/>
+        <int:poller fixed-rate="3" time-unit="SECONDS"/>
     </int-file:inbound-channel-adapter>
 
     <int:channel id="inboundChannel"/>
 
-    <int-file:outbound-channel-adapter id="outboundAdapter"
+    <int-file:outbound-channel-adapter id="outboundFileAdapter"
                                        directory="file:assets/write"
-                                       auto-create-directory="true"
                                        channel="inboundChannel"/>
 </beans>

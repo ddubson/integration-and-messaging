@@ -4,7 +4,9 @@
 
 ### Basic Integration (basic-integration)
 
-Input Channel -> Service Activator (Endpoint) -> Output Channel
+```
+./gradlew :spring-integration:basic-integration:bootRun
+```
 
 ![basic-integration-schema](https://github.com/ddubson/integration-and-messaging/blob/master/assets/basic-integration-schema.png)
 
@@ -154,11 +156,19 @@ Inbound adapters receive information from external systems, outbound adapters pu
 
 Reading from file system
 
+```
+./gradlew :spring-integration:file-system-integration:reading-files:bootRun
+```
+
 ![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/reading-files-1.png)
 
 #### Writing Files
 
 Writing files to the file system
+
+```
+./gradlew :spring-integration:file-system-integration:writing-files:bootRun
+```
 
 ![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/writing-files-1.png)
 

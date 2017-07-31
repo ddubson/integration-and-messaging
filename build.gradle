@@ -21,8 +21,6 @@ buildscript {
 }
 
 subprojects {
-
-
     apply plugin: "java"
     apply plugin: "org.springframework.boot"
 
@@ -39,8 +37,6 @@ subprojects {
         testCompile 'junit:junit:4.12'
     }
 }
-
-project(":commons") {}
 
 project(":spring-amqp-rabbitmq") {
     dependencies {
