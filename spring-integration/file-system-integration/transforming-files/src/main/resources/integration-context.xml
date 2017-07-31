@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-file="http://www.springframework.org/schema/integration/file"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration
+            http://www.springframework.org/schema/integration/spring-integration.xsd
+            http://www.springframework.org/schema/integration/file
+            http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
+    <!-- (1) Read *.txt files from assets/read directory (every 3 seconds) and put on inboundChannel -->
+    <int-file:inbound-channel-adapter id="inboundFileAdapter"
+                                      directory="file:assets/read"
+                                      filename-pattern="*.txt"
+                                      channel="inboundChannel">
+        <int:poller fixed-rate="3" time-unit="SECONDS"/>
+    </int-file:inbound-channel-adapter>
+
+
+    <!-- (2) Read files from inboundChannel and convert files to string representations and put on transformedFileChannel -->
+    <int-file:file-to-string-transformer id="fileTransformer"
+                                         input-channel="inboundChannel"
+                                         output-channel="transformedFileChannel"/>
+
+    <!-- (3) Consume file strings off of transformedFileChannel and print string -->
+    <int:service-activator id="filePrinterEndpoint"
+                           ref="filePrinter" method="print"
+                           input-channel="transformedFileChannel"/>
+
+    <int:channel id="inboundChannel"/>
+    <int:channel id="transformedFileChannel"/>
+</beans>
