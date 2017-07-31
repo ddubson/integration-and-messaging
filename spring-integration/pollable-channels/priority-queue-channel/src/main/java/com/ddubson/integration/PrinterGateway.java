@@ -1,4 +1,4 @@
-package com.ddubson;
+package com.ddubson.integration;
 
 import org.springframework.messaging.Message;
 

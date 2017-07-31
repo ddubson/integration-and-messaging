@@ -4,17 +4,20 @@
        xmlns:int="http://www.springframework.org/schema/integration"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
+    <!-- (1) Send messages to gateway -->
+    <int:gateway id="gateway"
+                 service-interface="com.ddubson.integration.PrinterGateway"
+                 default-request-channel="inputChannel"/>
 
+    <!-- (2) Channel is based on a priority queue -->
     <int:channel id="inputChannel">
-        <int:queue capacity="10" />
+        <int:priority-queue capacity="10"/>
     </int:channel>
 
-    <int:gateway id="gateway" service-interface="com.ddubson.gateways.PrinterGateway" default-request-channel="inputChannel" />
-
-    <bean class="com.ddubson.services.PrintService" id="printService"/>
-
-    <int:service-activator id="serviceActivator" ref="printService" method="print"
+    <!-- (3) Service activator reads from input channel 2 msgs every 2 seconds. -->
+    <int:service-activator id="serviceActivator"
+                           ref="printService" method="print"
                            input-channel="inputChannel">
-        <int:poller fixed-rate="2" time-unit="SECONDS" max-messages-per-poll="2" />
+        <int:poller fixed-rate="2" time-unit="SECONDS" max-messages-per-poll="2"/>
     </int:service-activator>
 </beans>

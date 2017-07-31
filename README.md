@@ -12,9 +12,17 @@ Input Channel -> Service Activator (Endpoint) -> Output Channel
 
 #### Queue Channel
 
+```
+./gradlew :spring-integration:pollable-channels:queue-channel:bootRun
+```
+
 ![pollable-queue-channel-schema](https://github.com/ddubson/integration-and-messaging/blob/master/assets/pollable-queue-channel-schema.png)
 
 #### Priority Queue Channel
+
+```
+./gradlew :spring-integration:pollable-channels:priority-queue-channel:bootRun
+```
 
 ![pollable-queue-channel-schema](https://github.com/ddubson/integration-and-messaging/blob/master/assets/pollable-priority-queue-channel-schema.png)
 
