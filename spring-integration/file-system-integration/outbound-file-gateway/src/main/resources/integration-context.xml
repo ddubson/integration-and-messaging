@@ -10,27 +10,35 @@
             http://www.springframework.org/schema/integration/spring-integration.xsd
             http://www.springframework.org/schema/integration/file
             http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
-
-    <int-file:inbound-channel-adapter id="inboundFileAdapter4" 
-    									 directory="file:assets/read"
-                                      filename-pattern="sample.txt"
+    <!-- (1) Read *.txt files from 'assets/read' dir and place on inboundChannel -->
+    <int-file:inbound-channel-adapter id="inboundFileAdapter"
+                                      directory="file:assets/read"
+                                      auto-create-directory="false"
+                                      filename-pattern="*.txt"
                                       channel="inboundChannel">
-        <int:poller fixed-rate="3000"/>
+        <int:poller fixed-rate="3" time-unit="SECONDS"/>
     </int-file:inbound-channel-adapter>
 
     <int:channel id="inboundChannel"/>
     <int:channel id="transformerChannel"/>
     <int:channel id="outboundChannel"/>
 
-    <int-file:file-to-string-transformer id="fileTransformer2" input-channel="inboundChannel" output-channel="transformerChannel"/>
-    
+    <!-- (2) Consume file from inboundChannel and transform to string contents, place on transformerChannel -->
+    <int-file:file-to-string-transformer id="fileTransformer" input-channel="inboundChannel"
+                                         output-channel="transformerChannel"/>
+
+    <!-- (3) Consume off of transformerChannel, write string to file in 'assets/write' dir, relay file string contents
+    to outboundChannel -->
     <int-file:outbound-gateway id="outboundGateway"
                                request-channel="transformerChannel"
                                reply-channel="outboundChannel"
+                               auto-create-directory="false"
                                directory="file:assets/write"
                                mode="REPLACE"
     />
 
-    <int:service-activator id="filePrinterEndpoint" ref="filePrinter" method="print" input-channel="outboundChannel"/>
-    <bean id="filePrinter" class="com.ddubson.printers.FilePrinter"/>
+    <!-- (4) Print file string that is on outbound channel -->
+    <int:service-activator id="filePrinterEndpoint"
+                           ref="filePrinter" method="print"
+                           input-channel="outboundChannel"/>
 </beans>

@@ -174,9 +174,17 @@ Writing files to the file system
 
 #### Transforming Files
 
+```
+./gradlew :spring-integration:file-system-integration:transforming-files:bootRun
+```
+
 ![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/transforming-files-1.png)
 
 #### Outbound Gateway
+
+```
+./gradlew :spring-integration:file-system-integration:outbound-file-gateway:bootRun
+```
 
 ![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/outbound-gateway-1.png)
 
