@@ -22,15 +22,33 @@ Input Channel -> Service Activator (Endpoint) -> Output Channel
 
 #### Direct Channel
 
+```
+./gradlew :spring-integration:subscribable-channels:direct-channel:bootRun
+```
+
 ![subscribable-queue-channel-schema](https://github.com/ddubson/integration-and-messaging/blob/master/assets/subscribable-direct-channel-schema.png)
 
 #### Publish-Subscribe Channel
 
+```
+./gradlew :spring-integration:subscribable-channels:pubsub-channel:bootRun
+```
+
 ![subscribable-queue-channel-schema](https://github.com/ddubson/integration-and-messaging/blob/master/assets/subscribable-pubsub-channel-schema.png)
 
-### Messaging Bridge
+#### Messaging Bridge
+
+```
+./gradlew :spring-integration:subscribable-channels:messaging-bridge:bootRun
+```
 
 ![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/message-bridge-schema.png)
+
+#### Channel Interceptors
+
+```
+./gradlew :spring-integration:subscribable-channels:channel-interceptors:bootRun
+```
 
 ### Router
 
