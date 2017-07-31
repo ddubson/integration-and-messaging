@@ -10,17 +10,18 @@
             http://www.springframework.org/schema/integration/file
             http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
 
+    <!-- (1) Read *.txt files from assets/read directory and put on 'inboundChannel' -->
     <int-file:inbound-channel-adapter id="inboundFileAdapter"
-    									 directory="file:assets/read/"
-                                      filename-pattern="sample.txt"
+                                      directory="file:assets/read/"
+                                      filename-pattern="*.txt"
                                       channel="inboundChannel">
-        <int:poller fixed-rate="3000"/>
+        <int:poller fixed-rate="3" time-unit="SECONDS"/>
     </int-file:inbound-channel-adapter>
 
+    <!-- (2) Store file messages on channel -->
     <int:channel id="inboundChannel"/>
 
-    <bean id="filePrinter" class="com.ddubson.printers.FilePrinter"/>
-
+    <!-- (3) Grab files off of inboundChannel, and send them to 'print' method of FilePrinter service -->
     <int:service-activator id="endpoint"
                            ref="filePrinter"
                            method="print"

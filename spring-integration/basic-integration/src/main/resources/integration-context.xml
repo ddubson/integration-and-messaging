@@ -6,11 +6,11 @@
             http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
 
     <int:channel id="inputChannel"/>
-
     <int:channel id="outputChannel"/>
 
     <int:service-activator id="serviceActivator"
-                           ref="printService" method="print"
+                           ref="printService"
+                           method="print"
                            input-channel="inputChannel"
                            output-channel="outputChannel"/>
 </beans>
