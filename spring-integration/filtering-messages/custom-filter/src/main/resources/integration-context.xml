@@ -4,20 +4,22 @@
        xmlns:int="http://www.springframework.org/schema/integration"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
+    <!-- (1) Send messages to inputChannel via gateway -->
     <int:gateway service-interface="com.ddubson.gateways.PrinterGateway"
                  id="customFilterGateway"
-                 default-request-channel="inputChannel2"/>
+                 default-request-channel="inputChannel"/>
 
-    <int:channel id="inputChannel2"/>
-    <int:channel id="outputChannel2"/>
 
+    <!-- (2) Consume messages from inputChannel, apply custom filter, and send output to output channel -->
     <int:filter id="customFilterRef"
                 ref="customFilter"
-                input-channel="inputChannel2"
-                output-channel="outputChannel2"/>
+                input-channel="inputChannel"
+                output-channel="outputChannel"/>
 
-    <bean id="customFilter" class="com.ddubson.filters.CustomFilter"/>
-    <bean id="customStringPrintService" class="com.ddubson.services.StringPrintService"/>
+    <!-- (3) Consume off of outputchannel and print the message -->
+    <int:service-activator id="stringPrintCustom" ref="stringPrintService" method="print"
+                           input-channel="outputChannel"/>
 
-    <int:service-activator id="stringPrintCustom" ref="stringPrintService" method="print" input-channel="outputChannel2"/>
+    <int:channel id="inputChannel"/>
+    <int:channel id="outputChannel"/>
 </beans>
