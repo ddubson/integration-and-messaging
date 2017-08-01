@@ -19,29 +19,22 @@
         </property>
     </bean>
 
-    <bean id="queue" class="org.apache.activemq.command.ActiveMQQueue">
-        <constructor-arg value="sample.queue"/>
-    </bean>
-
-    <int:object-to-string-transformer input-channel="inboundChannel" output-channel="outboundChannel" />
-
-    <int-jms:outbound-channel-adapter id="outboundAdapter"
-                                      connection-factory="activeMqConnFactory"
-                                      channel="outboundChannel"
-                                      destination="queue"/>
-
+    <!-- (1) Send message to inbound channel -->
     <int:gateway id="personGateway"
                  service-interface="com.ddubson.PersonGateway"
                  default-request-channel="inboundChannel"/>
 
-    <int:service-activator id="mp"
-                           ref="messagePrinter"
-                           method="print"
-                           input-channel="jmsChannel"/>
+    <!-- (2) Take Person object off of inboundChannel, transform to string, put on outbound channel -->
+    <int:object-to-string-transformer id="objToStringTransformer"
+                                      input-channel="inboundChannel"
+                                      output-channel="outboundChannel"/>
 
-    <int:channel id="jmsChannel"/>
+    <!-- (3) From outbound channel, put messages onto 'sampleQueue' -->
+    <int-jms:outbound-channel-adapter id="outboundAdapter"
+                                      connection-factory="activeMqConnFactory"
+                                      channel="outboundChannel"
+                                      destination="sampleQueue"/>
+
     <int:channel id="inboundChannel"/>
     <int:channel id="outboundChannel"/>
-
-    <bean id="messagePrinter" class="com.ddubson.MessagePrinter"/>
 </beans>
