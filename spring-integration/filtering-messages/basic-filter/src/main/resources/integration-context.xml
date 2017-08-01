@@ -4,20 +4,20 @@
        xmlns:int="http://www.springframework.org/schema/integration"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
-    <int:gateway service-interface="com.ddubson.gateways.PrinterGateway"
+    <!-- (1) Send messages from gateway to inputChannel -->
+    <int:gateway service-interface="com.ddubson.integration.PrinterGateway"
                  id="gateway"
                  default-request-channel="inputChannel"/>
 
-    <int:channel id="inputChannel"/>
-    <int:channel id="outputChannel"/>
-
+    <!-- (2) From inputChannel, identify messages that are of payload 4, send to outputChannel if matched -->
     <int:filter id="basicFilter"
                 input-channel="inputChannel"
                 output-channel="outputChannel"
-                expression="payload.equals(4)"
-    />
+                expression="payload.equals(4)"/>
 
-    <bean id="stringPrintService" class="com.ddubson.services.StringPrintService"/>
-
+    <!-- (3) Print all the messages from the outputChannel (filtered) -->
     <int:service-activator id="stringPrint" ref="stringPrintService" method="print" input-channel="outputChannel"/>
+
+    <int:channel id="inputChannel"/>
+    <int:channel id="outputChannel"/>
 </beans>
