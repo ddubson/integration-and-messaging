@@ -19,10 +19,6 @@ import static com.ddubson.ConsolePrinterUtils.printBanner;
 @ImportResource("integration-context.xml")
 public class MessageTransformerApp implements ApplicationRunner {
     @Autowired
-    @Qualifier("gateway")
-    private PrinterGateway gateway;
-
-    @Autowired
     @Qualifier("customTransformerGateway")
     private PrinterGateway customTransformerGateway;
 
@@ -40,7 +36,6 @@ public class MessageTransformerApp implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        //basicTransformer();
         //customTransformer();
         //filteringHeaders();
         //headerEnricher();
@@ -93,16 +88,6 @@ public class MessageTransformerApp implements ApplicationRunner {
         });
 
         printBanner("END CUSTOM TRANSFORMER");
-    }
-
-    private void basicTransformer() {
-        printBanner("BASIC TRANSFORMER");
-        Stream.iterate(0, n -> n + 1).limit(10).forEach(i -> {
-            Message<?> intMessage = MessageBuilder.withPayload("Hello World").build();
-            this.gateway.print(intMessage);
-        });
-
-        printBanner("END BASIC TRANSFORMER");
     }
 
     public static void main(String[] args) {
