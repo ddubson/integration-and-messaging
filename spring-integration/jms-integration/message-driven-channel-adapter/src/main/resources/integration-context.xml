@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration
+            http://www.springframework.org/schema/integration/spring-integration.xsd
+            http://www.springframework.org/schema/integration/jms
+            http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd">
+    <bean id="activeMqConnFactory"
+          class="org.springframework.jms.connection.CachingConnectionFactory">
+        <property name="targetConnectionFactory">
+            <bean class="org.apache.activemq.ActiveMQConnectionFactory">
+                <property name="brokerURL" value="tcp://localhost:61616"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- (1) Send message to inbound channel -->
+    <int:gateway id="personGateway"
+                 service-interface="com.ddubson.PersonGateway"
+                 default-request-channel="inboundChannel"/>
+
+    <!-- (2) Take Person object off of inboundChannel, transform to string, put on outbound channel -->
+    <int:object-to-string-transformer id="objToStringTransformer"
+                                      input-channel="inboundChannel"
+                                      output-channel="outboundChannel"/>
+
+    <!-- (3) From outbound channel, put messages onto 'sampleQueue' in ActiveMQ -->
+    <int-jms:outbound-channel-adapter id="outboundAdapter"
+                                      connection-factory="activeMqConnFactory"
+                                      channel="outboundChannel"
+                                      destination="sampleQueue"/>
+
+    <!-- (4) Observe sampleQueue, and put messages to jmsChannel -->
+    <int-jms:message-driven-channel-adapter id="messageDrivenChannelAdapter"
+                                            connection-factory="activeMqConnFactory"
+                                            destination="sampleQueue"
+                                            channel="jmsChannel"/>
+
+    <!-- (5) Read from jmsChannel, and print messages found on the channel -->
+    <int:service-activator id="mp"
+                           ref="messagePrinter"
+                           method="print"
+                           input-channel="jmsChannel"/>
+
+    <int:channel id="jmsChannel"/>
+    <int:channel id="inboundChannel"/>
+    <int:channel id="outboundChannel"/>
+</beans>
