@@ -10,15 +10,20 @@
             http://www.springframework.org/schema/integration/spring-integration.xsd
             http://www.springframework.org/schema/integration/jdbc
             http://www.springframework.org/schema/integration/jdbc/spring-integration-jdbc.xsd">
-    <import resource="data-source.xml"/>
+    <import resource="data-source.xml" />
+    <!-- (1) Read from db with query every 4 seconds -->
+    <int-jdbc:inbound-channel-adapter id="inboundChannelAdapter"
+                                      channel="inputChannel"
+                                      query="select * from person"
+                                      data-source="dataSource">
+        <int:poller fixed-rate="4" time-unit="SECONDS"/>
+    </int-jdbc:inbound-channel-adapter>
 
-    <int:gateway id="personGateway"
-                 service-interface="com.ddubson.PersonGateway"
-                 default-request-channel="inboundChannel"></int:gateway>
+    <int:channel id="inputChannel"/>
 
-    <int-jdbc:outbound-channel-adapter channel="inboundChannel"
-                                       data-source="dataSource"
-                                       query="insert into person values(:payload.id,:payload.firstName,:payload.lastName)"/>
-
-    <int:channel id="inboundChannel"/>
+    <!-- (2) Consume off of inputChannel, and print -->
+    <int:service-activator id="mp"
+                           ref="messagePrinter"
+                           method="print"
+                           input-channel="inputChannel"/>
 </beans>

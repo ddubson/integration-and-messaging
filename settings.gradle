@@ -14,12 +14,19 @@ include 'spring-integration:splitting-aggregating-messages'
 include 'spring-integration:message-transformers'
 include 'spring-integration:message-transformers:basic-transformer'
 include 'spring-integration:processing-endpoints'
+
 include 'spring-integration:file-system-integration:reading-files'
 include 'spring-integration:file-system-integration:writing-files'
 include 'spring-integration:file-system-integration:transforming-files'
 include 'spring-integration:file-system-integration:outbound-file-gateway'
+
 include 'spring-integration:ftp-integration'
+
 include 'spring-integration:jdbc-integration'
+include 'spring-integration:jdbc-integration:inbound-channel-adapter'
+include 'spring-integration:jdbc-integration:outbound-channel-adapter'
+include 'spring-integration:jdbc-integration:outbound-gateway'
+
 include 'spring-integration:jms-integration:outbound-channel-adapter'
 include 'spring-integration:jms-integration:inbound-channel-adapter'
 include 'spring-integration:jms-integration:message-driven-channel-adapter'

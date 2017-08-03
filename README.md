@@ -202,6 +202,26 @@ Writing files to the file system
 
 ![](https://github.com/ddubson/integration-and-messaging/blob/master/assets/ftp-3.png)
 
+### JDBC Integrations
+
+#### Inbound Channel Adapter
+
+```
+./gradlew :spring-integration:jdbc-integration:inbound-channel-adapter:bootRun
+```
+
+#### Outbound Channel Adapter
+
+```
+./gradlew :spring-integration:jdbc-integration:outbound-channel-adapter:bootRun
+```
+
+#### Outbound Gateway
+
+```
+./gradlew :spring-integration:jdbc-integration:outbound-gateway:bootRun
+```
+
 ---
 
 ## File Transfer Pattern Project (file-transfer-pattern)

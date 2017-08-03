@@ -21,7 +21,7 @@
 
     <!-- (1) Send message to inbound channel -->
     <int:gateway id="personGateway"
-                 service-interface="com.ddubson.PersonGateway"
+                 service-interface="com.ddubson.integration.PersonGateway"
                  default-request-channel="inboundChannel"/>
 
     <!-- (2) Take Person object off of inboundChannel, transform to string, put on outbound channel -->

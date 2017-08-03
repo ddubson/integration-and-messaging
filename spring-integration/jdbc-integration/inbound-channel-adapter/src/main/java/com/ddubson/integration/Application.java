@@ -1,27 +1,30 @@
-package com.ddubson;
+package com.ddubson.integration;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.ddubson.CommandLineLogAdapter;
+import com.ddubson.LogAdapter;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.integration.annotation.Gateway;
+
+import static com.ddubson.ANSIColor.ANSI_WHITE;
 
 @SpringBootApplication
 @ImportResource("integration-context.xml")
-public class JdbcIntegrationApp implements ApplicationRunner {
-    @Autowired
-    PersonGateway personGateway;
-
+public class Application implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        Person person = new Person(4, "Jane", "Doe");
-        this.personGateway.save(person);
+        logAdapter().info("[1] Reading from jdbc.", ANSI_WHITE);
+    }
+
+    @Bean
+    public LogAdapter logAdapter() {
+        return new CommandLineLogAdapter();
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(JdbcIntegrationApp.class, args);
+        SpringApplication.run(Application.class, args);
     }
 }

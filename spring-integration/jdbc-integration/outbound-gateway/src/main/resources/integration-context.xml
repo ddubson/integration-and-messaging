@@ -12,10 +12,12 @@
             http://www.springframework.org/schema/integration/jdbc/spring-integration-jdbc.xsd">
     <import resource="data-source.xml"/>
 
+    <!-- (1) Send message to gateway -->
     <int:gateway id="personGateway"
-                 service-interface="com.ddubson.PersonGateway"
+                 service-interface="com.ddubson.integration.PersonGateway"
                  default-request-channel="inboundChannel"/>
 
+    <!-- (2) Read from inboundChannel, write to db, reply to jdbcChannel -->
     <int-jdbc:outbound-gateway id="outboundGateway"
                                request-channel="inboundChannel"
                                data-source="dataSource"
@@ -23,9 +25,9 @@
                                query="select * from person where person_id = :payload.id"
                                reply-channel="jdbcChannel"/>
 
+    <!-- (3) Consume from jdbcChannel and print -->
+    <int:service-activator ref="messagePrinter" method="print" input-channel="jdbcChannel"/>
+
     <int:channel id="inboundChannel"/>
     <int:channel id="jdbcChannel"/>
-
-    <int:service-activator ref="messagePrinter" method="print" input-channel="jdbcChannel"/>
-    <bean id="messagePrinter" class="com.ddubson.MessagePrinter"/>
 </beans>

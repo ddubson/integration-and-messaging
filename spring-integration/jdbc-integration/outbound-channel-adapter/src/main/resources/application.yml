@@ -1,0 +1,11 @@
+spring:
+  main:
+    banner-mode: "off"
+  jpa:
+    show-sql: true
+logging:
+  level:
+    root: WARN
+    org.springframework:
+      integration: WARN
+      jdbc: DEBUG
