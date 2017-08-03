@@ -82,23 +82,6 @@ public class RoutingApp implements ApplicationRunner {
         printBanner("END HEADER VALUE ROUTER");
     }
 
-    private void payloadTypeRouter() {
-        printBanner("PAYLOAD ROUTER TYPE");
-        Stream.iterate(0, n -> n + 1).limit(10).forEach(i -> {
-            Message<String> message = MessageBuilder.withPayload("Message " + i)
-                    .build();
-            this.gateway.print(message);
-        });
-
-        Stream.iterate(0, n -> n + 1).limit(10).forEach(i -> {
-            Message<Integer> message = MessageBuilder.withPayload(i)
-                    .build();
-            this.gateway.print(message);
-        });
-
-        printBanner("END PAYLOAD ROUTER TYPE");
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(RoutingApp.class, args);
     }

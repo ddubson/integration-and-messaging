@@ -1,18 +1,26 @@
 rootProject.name = 'integration-and-messaging'
 include 'commons', 'spring-amqp-rabbitmq', 'file-transfer-pattern' , 'spring-jms-simple'
 include 'spring-integration:basic-integration'
+
 include 'spring-integration:subscribable-channels:direct-channel'
 include 'spring-integration:subscribable-channels:pubsub-channel'
 include 'spring-integration:subscribable-channels:messaging-bridge'
 include 'spring-integration:subscribable-channels:channel-interceptors'
+
 include 'spring-integration:pollable-channels:queue-channel'
 include 'spring-integration:pollable-channels:priority-queue-channel'
+
 include 'spring-integration:routing-messages'
+include 'spring-integration:routing-messages:payload-type-router'
+
 include 'spring-integration:filtering-messages:basic-filter'
 include 'spring-integration:filtering-messages:custom-filter'
+
 include 'spring-integration:splitting-aggregating-messages'
+
 include 'spring-integration:message-transformers'
 include 'spring-integration:message-transformers:basic-transformer'
+
 include 'spring-integration:processing-endpoints'
 
 include 'spring-integration:file-system-integration:reading-files'
@@ -22,7 +30,6 @@ include 'spring-integration:file-system-integration:outbound-file-gateway'
 
 include 'spring-integration:ftp-integration'
 
-include 'spring-integration:jdbc-integration'
 include 'spring-integration:jdbc-integration:inbound-channel-adapter'
 include 'spring-integration:jdbc-integration:outbound-channel-adapter'
 include 'spring-integration:jdbc-integration:outbound-gateway'

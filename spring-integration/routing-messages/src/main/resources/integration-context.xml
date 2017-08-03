@@ -4,7 +4,6 @@
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <import resource="integration-payload-type-router.xml"/>
     <import resource="integration-header-value-router.xml"/>
     <import resource="integration-recipient-list.xml"/>
     <import resource="integration-custom-router.xml"/>

@@ -4,20 +4,23 @@
        xmlns:int="http://www.springframework.org/schema/integration"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
-    <int:gateway service-interface="com.ddubson.gateways.PrinterGateway" id="gateway" default-request-channel="inputChannel"/>
+    <!-- (1) Send message to inputChannel via gateway -->
+    <int:gateway service-interface="com.ddubson.integration.PrinterGateway" id="gateway"
+                 default-request-channel="inputChannel"/>
 
+    <!-- (2) Consume off of inputChannel, route based on payload. -->
     <int:payload-type-router id="payloadRouter" input-channel="inputChannel">
         <int:mapping type="java.lang.Integer" channel="intChannel"/>
         <int:mapping type="java.lang.String" channel="stringChannel"/>
     </int:payload-type-router>
 
-    <int:channel id="inputChannel" />
-    <int:channel id="intChannel" />
-    <int:channel id="stringChannel" />
+    <!-- (3) Consume off of respective channels and print -->
+    <int:service-activator id="numberPrint" ref="numericPrintService"
+                           method="print" input-channel="intChannel"/>
+    <int:service-activator id="stringPrint" ref="stringPrintService"
+                           method="print" input-channel="stringChannel"/>
 
-    <bean id="stringPrintService" class="com.ddubson.services.StringPrintService" />
-    <bean id="numericPrintService" class="com.ddubson.services.NumericPrintService" />
-
-    <int:service-activator id="numberPrint" ref="numericPrintService" method="print" input-channel="intChannel" />
-    <int:service-activator id="stringPrint" ref="stringPrintService" method="print" input-channel="stringChannel" />
+    <int:channel id="inputChannel"/>
+    <int:channel id="stringChannel"/>
+    <int:channel id="intChannel"/>
 </beans>
