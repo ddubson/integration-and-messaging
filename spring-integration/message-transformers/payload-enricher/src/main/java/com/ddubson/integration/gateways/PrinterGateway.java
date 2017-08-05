@@ -1,4 +1,4 @@
-package com.ddubson.gateways;
+package com.ddubson.integration.gateways;
 
 import org.springframework.messaging.Message;
 

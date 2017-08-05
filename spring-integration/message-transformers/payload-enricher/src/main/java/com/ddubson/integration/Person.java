@@ -1,4 +1,4 @@
-package com.ddubson;
+package com.ddubson.integration;
 
 public class Person {
     String firstName;

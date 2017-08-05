@@ -26,6 +26,6 @@
                            method="print"
                            input-channel="printChannel"/>
 
-    <bean id="stringPrintService" class="com.ddubson.services.StringPrintService"/>
+    <bean id="stringPrintService" class="StringPrintService"/>
     <bean id="uppercaseStringService" class="com.ddubson.services.UppercaseStringService"/>
 </beans>

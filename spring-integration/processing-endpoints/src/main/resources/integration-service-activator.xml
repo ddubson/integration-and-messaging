@@ -4,7 +4,7 @@
        xmlns:int="http://www.springframework.org/schema/integration"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
-    <int:gateway service-interface="com.ddubson.gateways.PrinterGateway"
+    <int:gateway service-interface="PrinterGateway"
                  id="gateway"
                  default-request-channel="inputChannel"/>
 
@@ -21,6 +21,6 @@
                            method="print"
                            input-channel="outputChannel"/>
 
-    <bean id="stringPrintService" class="com.ddubson.services.StringPrintService"/>
+    <bean id="stringPrintService" class="StringPrintService"/>
     <bean id="uppercaseStringService" class="com.ddubson.services.UppercaseStringService"/>
 </beans>

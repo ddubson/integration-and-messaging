@@ -4,7 +4,7 @@
        xmlns:int="http://www.springframework.org/schema/integration"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
-    <int:gateway service-interface="com.ddubson.gateways.PrinterGateway"
+    <int:gateway service-interface="PrinterGateway"
                  id="aggGateway"
                  default-request-channel="inputChannel2"/>
 
@@ -22,7 +22,7 @@
                     output-channel="outputChannel2" />
 
     <bean id="customSplitter" class="com.ddubson.splitters.CustomSplitter" />
-    <bean id="stringPrintService" class="com.ddubson.services.StringPrintService"/>
+    <bean id="stringPrintService" class="StringPrintService"/>
 
     <int:service-activator id="aggStringPrint" ref="stringPrintService" method="print" input-channel="outputChannel2"/>
 </beans>

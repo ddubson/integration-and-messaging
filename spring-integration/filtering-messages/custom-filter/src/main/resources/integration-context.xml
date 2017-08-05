@@ -5,7 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
     <!-- (1) Send messages to inputChannel via gateway -->
-    <int:gateway service-interface="com.ddubson.gateways.PrinterGateway"
+    <int:gateway service-interface="PrinterGateway"
                  id="customFilterGateway"
                  default-request-channel="inputChannel"/>
 

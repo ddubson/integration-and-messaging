@@ -4,7 +4,7 @@
        xmlns:int="http://www.springframework.org/schema/integration"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
-    <int:gateway service-interface="com.ddubson.gateways.PrinterGateway" id="customRouterGateway"
+    <int:gateway service-interface="PrinterGateway" id="customRouterGateway"
                  default-request-channel="inputChannel3"/>
 
     <int:router id="customRouterRef" ref="customRouter" input-channel="inputChannel3"/>
@@ -17,7 +17,7 @@
     <bean id="customRouter" class="com.ddubson.routers.CustomRouter"/>
     <bean id="defaultPrintService" class="com.ddubson.services.DefaultPrintService"/>
     <bean id="numericPrintService" class="com.ddubson.services.NumericPrintService"/>
-    <bean id="stringPrintService" class="com.ddubson.services.StringPrintService"/>
+    <bean id="stringPrintService" class="StringPrintService"/>
 
     <int:service-activator id="defaultPrint" ref="defaultPrintService" method="print" input-channel="defaultChannel"/>
     <int:service-activator id="numberPrint" ref="numericPrintService" method="print" input-channel="intChannel"/>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
+    <!-- (1) Send message into gateway -->
+    <int:gateway service-interface="com.ddubson.integration.gateways.PrinterGateway"
+                 id="gateway"
+                 default-request-channel="inputChannel"/>
+
+    <!-- (2) For each message on inputChannel, add phoneNumber field and send to outputChannel -->
+    <int:enricher id="enricher"
+                  input-channel="inputChannel"
+                  request-channel="requestChannel"
+                  output-channel="outputChannel">
+        <!-- assign whole payload to the phonenumber field -->
+        <int:property name="phoneNumber" expression="payload"/>
+    </int:enricher>
+
+    <!-- (2.1) call getPhoneNumber for each message on requestChannel -->
+    <int:service-activator id="customServiceRef"
+                           ref="payloadEnricherService"
+                           input-channel="requestChannel"
+                           method="getPhoneNumber"/>
+
+    <!-- (3) For each message on outputChannel, print message -->
+    <int:service-activator id="stringPrint" ref="stringPrintService" method="print" input-channel="outputChannel"/>
+
+    <int:channel id="inputChannel"/>
+    <int:channel id="outputChannel"/>
+    <int:channel id="requestChannel"/>
+</beans>
