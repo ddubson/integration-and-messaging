@@ -21,6 +21,7 @@ include 'spring-integration:splitting-aggregating-messages'
 include 'spring-integration:message-transformers'
 include 'spring-integration:message-transformers:basic-transformer'
 include 'spring-integration:message-transformers:custom-transformer'
+include 'spring-integration:message-transformers:filtering-headers'
 
 include 'spring-integration:processing-endpoints'
 

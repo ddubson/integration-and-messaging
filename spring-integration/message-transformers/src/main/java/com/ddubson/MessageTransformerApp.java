@@ -19,14 +19,6 @@ import static com.ddubson.ConsolePrinterUtils.printBanner;
 @ImportResource("integration-context.xml")
 public class MessageTransformerApp implements ApplicationRunner {
     @Autowired
-    @Qualifier("customTransformerGateway")
-    private PrinterGateway customTransformerGateway;
-
-    @Autowired
-    @Qualifier("gateway3")
-    private PrinterGateway filterHeaderGateway;
-
-    @Autowired
     @Qualifier("gateway4")
     private PrinterGateway headerEnricherGateway;
 
@@ -36,8 +28,6 @@ public class MessageTransformerApp implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        //customTransformer();
-        //filteringHeaders();
         //headerEnricher();
         payloadEnricher();
     }
@@ -65,29 +55,6 @@ public class MessageTransformerApp implements ApplicationRunner {
         });
 
         printBanner("END HEADER ENRICHER");
-    }
-
-    private void filteringHeaders() {
-        printBanner("FILTERING HEADERS");
-        Stream.iterate(0, n -> n + 1).limit(3).forEach(i -> {
-            Message<?> intMessage = MessageBuilder
-                    .withPayload("Hello World")
-                    .setHeader("privateKey", "12345")
-                    .build();
-            this.filterHeaderGateway.print(intMessage);
-        });
-
-        printBanner("END FILTERING HEADERS");
-    }
-
-    private void customTransformer() {
-        printBanner("CUSTOM TRANSFORMER");
-        Stream.iterate(0, n -> n + 1).limit(10).forEach(i -> {
-            Message<?> intMessage = MessageBuilder.withPayload("Hello World").build();
-            this.customTransformerGateway.print(intMessage);
-        });
-
-        printBanner("END CUSTOM TRANSFORMER");
     }
 
     public static void main(String[] args) {
