@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
+    <!-- (1) Send message to inputChannel via gateway -->
+    <int:gateway service-interface="com.ddubson.integration.PrinterGateway"
+                 id="gateway"
+                 default-request-channel="inputChannel"/>
+
+    <!-- (2) Consume off of inputChannel, add Header value, and put onto outputChannel -->
+    <int:header-enricher id="headerEnricher4" input-channel="inputChannel" output-channel="outputChannel">
+        <int:header name="publicKey" ref="customEnricher" method="getHeaderValue"/>
+    </int:header-enricher>
+
+    <!-- (3) Print message that is on outputChannel -->
+    <int:service-activator id="stringPrint" ref="stringPrintService" method="print" input-channel="outputChannel"/>
+
+    <int:channel id="inputChannel"/>
+    <int:channel id="outputChannel"/>
+</beans>
