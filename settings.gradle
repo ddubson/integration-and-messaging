@@ -41,3 +41,4 @@ include 'spring-integration:jms-integration:inbound-gateway'
 include 'spring-integration:jms-integration:outbound-gateway'
 
 include 'spring-integration:http-integration:inbound-channel-adapter'
+include 'spring-integration:http-integration:inbound-gateway'

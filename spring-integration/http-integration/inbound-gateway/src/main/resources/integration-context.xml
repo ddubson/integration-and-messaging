@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-http="http://www.springframework.org/schema/integration/http"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+            http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd">
+    <!-- (1) Create an HTTP listener on the '/' path (port 8080) -->
+    <int-http:inbound-gateway id="inboundGateway"
+                              request-channel="httpChannel"
+                              supported-methods="GET"
+                              path="/"
+    />
+
+    <!-- (2) Consume message from httpChannel, and reply to httpChannel-->
+    <int:service-activator id="mp" ref="messagePrinter" method="print" input-channel="httpChannel"/>
+
+    <int:channel id="httpChannel"/>
+    <int:channel id="outputChannel"/>
+</beans>
