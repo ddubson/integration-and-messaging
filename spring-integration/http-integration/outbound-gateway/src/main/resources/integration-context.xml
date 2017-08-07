@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-http="http://www.springframework.org/schema/integration/http"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+            http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd">
+    <!-- (1) Send message to gateway, put onto httpOutboundChannel -->
+    <int:gateway service-interface="com.ddubson.integration.SimpleGateway"
+                 default-request-channel="httpOutboundChannel"
+    />
+
+    <!-- (2) From httpOutboundChannel, consume message and send to http://localhost:8080-->
+    <!-- Wait for HTTP reply and put reply onto httpReplyChannel -->
+    <int-http:outbound-gateway
+            request-channel="httpOutboundChannel"
+            url="http://localhost:8080/"
+            http-method="GET"
+            reply-channel="httpReplyChannel"
+    />
+
+    <!-- (3) Listen for traffic on / and accept messages to httpChannel -->
+    <int-http:inbound-gateway id="inboundGateway"
+                              request-channel="httpChannel"
+                              supported-methods="GET"
+                              path="/"
+    />
+
+    <!-- (4) Print message off of httpChannel -->
+    <int:service-activator id="mp" ref="messagePrinter" method="print" input-channel="httpChannel"/>
+
+    <!-- (5) Print message off of httpReplyChannel-->
+    <int:service-activator id="mp2" ref="messagePrinter" method="printConsole" input-channel="httpReplyChannel"/>
+
+    <int:channel id="httpOutboundChannel"/>
+    <int:channel id="httpReplyChannel"/>
+    <int:channel id="httpChannel"/>
+    <int:channel id="outputChannel"/>
+</beans>
