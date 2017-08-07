@@ -72,6 +72,7 @@ configure(subprojects.findAll { it.path.startsWith(':spring-integration') }) {
         compile "org.springframework.integration:spring-integration-jdbc:${springVersion}"
         compile "org.springframework.integration:spring-integration-jms:${springVersion}"
         compile "org.springframework.integration:spring-integration-http:${springVersion}"
+        compile "org.springframework.integration:spring-integration-xml:${springVersion}"
         compile "org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}"
         compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
         compile "org.apache.activemq:activemq-client:${activeMQClientVersion}"

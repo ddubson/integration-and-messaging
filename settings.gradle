@@ -47,3 +47,6 @@ include 'spring-integration:http-integration:inbound-channel-adapter'
 include 'spring-integration:http-integration:inbound-gateway'
 include 'spring-integration:http-integration:outbound-gateway'
 include 'spring-integration:http-integration:outbound-channel-adapter'
+
+include 'spring-integration:xml-tooling'
+

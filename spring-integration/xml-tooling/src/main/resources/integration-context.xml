@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-xml="http://www.springframework.org/schema/integration/xml"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+            http://www.springframework.org/schema/integration/xml http://www.springframework.org/schema/integration/xml/spring-integration-xml.xsd">
+    <!-- (1) Send message to gateway -->
+    <int:gateway id="transformerGateway"
+                 service-interface="com.ddubson.integration.SimpleGateway"
+                 default-request-channel="xmlInputChannel"
+    />
+
+    <int:gateway id="headerEnricherGateway"
+                 service-interface="com.ddubson.integration.SimpleGateway"
+                 default-request-channel="xmlMiddleChannel"
+    />
+
+    <!-- (2) Search for the first person's first name in xmlInputChannel, put onto xmlOutputChannel -->
+    <int-xml:xpath-transformer id="xpathTransformer"
+                               input-channel="xmlInputChannel"
+                               output-channel="xmlOutputChannel"
+                               xpath-expression="/people/person[1]/firstName"/>
+
+    <int-xml:xpath-header-enricher input-channel="xmlMiddleChannel" output-channel="xmlOutputChannel">
+        <int-xml:header name="recordCount" xpath-expression="count(/people/person)" />
+    </int-xml:xpath-header-enricher>
+
+    <!-- (3) Print filtered message from xmlOutputChannel -->
+    <int:service-activator ref="messagePrinter" input-channel="xmlOutputChannel" method="printConsole"/>
+
+    <int:channel id="xmlInputChannel"/>
+    <int:channel id="xmlMiddleChannel"/>
+    <int:channel id="xmlOutputChannel"/>
+</beans>
