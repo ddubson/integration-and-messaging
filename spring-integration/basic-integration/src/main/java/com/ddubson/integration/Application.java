@@ -9,7 +9,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
@@ -19,10 +18,10 @@ import org.springframework.messaging.support.MessageBuilder;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.ddubson.ANSIColor.*;
+import static com.ddubson.ANSIColor.ANSI_BLUE;
+import static com.ddubson.ANSIColor.ANSI_RED;
 
 @SpringBootApplication
-@ImportResource("integration-context.xml")
 public class Application implements ApplicationRunner {
     @Autowired
     @Qualifier("inputChannel")

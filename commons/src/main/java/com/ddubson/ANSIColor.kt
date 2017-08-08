@@ -1,6 +1,6 @@
-package com.ddubson;
+package com.ddubson
 
-public enum ANSIColor {
+enum class ANSIColor(val color: String) {
     ANSI_RESET("\u001B[0m"),
     ANSI_BLACK("\u001B[30m"),
     ANSI_RED("\u001B[31m"),
@@ -11,13 +11,5 @@ public enum ANSIColor {
     ANSI_CYAN("\u001B[36m"),
     ANSI_WHITE("\u001B[37m");
 
-    private String color;
-
-    ANSIColor(String color) {
-        this.color = color;
-    }
-
-    public String color() {
-        return color;
-    }
+    fun color(): String = color
 }
