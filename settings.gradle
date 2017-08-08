@@ -1,5 +1,10 @@
 rootProject.name = 'integration-and-messaging'
-include 'commons', 'spring-amqp-rabbitmq', 'file-transfer-pattern' , 'spring-jms-simple'
+
+include 'commons'
+include 'spring-amqp-rabbitmq'
+include 'apache-camel:file-transfer-pattern'
+include 'spring-jms-simple'
+
 include 'spring-integration:basic-integration'
 
 include 'spring-integration:subscribable-channels:direct-channel'

@@ -8,7 +8,7 @@ class CommandLineLogAdapter : LogAdapter {
     }
 
     override fun info(message: String, color: ANSIColor) {
-        println("${color.color()} $message ${ANSI_RESET.color()}\n")
+        println("${color.color()} $message ${ANSI_RESET.color()}")
     }
 
 }

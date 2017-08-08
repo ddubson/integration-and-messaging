@@ -3,11 +3,9 @@ package com.ddubson.integration.services;
 import com.ddubson.ANSIColor;
 import com.ddubson.LogAdapter;
 import org.springframework.messaging.Message;
-import org.springframework.stereotype.Component;
 
 import static java.lang.String.format;
 
-@Component
 public class UppercasePrintService {
     private final LogAdapter logAdapter;
 

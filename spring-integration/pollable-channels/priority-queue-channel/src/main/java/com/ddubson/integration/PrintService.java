@@ -15,9 +15,10 @@ public class PrintService {
         this.logAdapter = logAdapter;
     }
 
-    public void print(Message<String> msg) {
+    public Message<String> print(Message<String> msg) {
         logAdapter.info(
                 format("[2] Consuming input channel -- [%s] %s", Thread.currentThread().getName(),
                         msg.getPayload()), ANSIColor.ANSI_GREEN);
+        return msg;
     }
 }

@@ -22,7 +22,6 @@ import static com.ddubson.ANSIColor.ANSI_PURPLE;
 import static java.util.stream.Collectors.toList;
 
 @SpringBootApplication
-@ImportResource("integration-context.xml")
 public class Application implements ApplicationRunner {
     @Autowired
     private PrinterGateway gateway;

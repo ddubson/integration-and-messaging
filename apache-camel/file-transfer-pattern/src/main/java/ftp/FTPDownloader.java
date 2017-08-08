@@ -7,15 +7,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Profile;
 
-/**
- * Created by ddubs on 12/2/2016.
- */
 @SpringBootApplication(exclude = {FTPUploader.class, FTPUploaderRouteBuilder.class})
 public class FTPDownloader implements CommandLineRunner{
     @Autowired
     Main camelMain;
+
     @Autowired
     RouteBuilder ftpDownloaderRouteBuilder;
 
@@ -27,5 +24,10 @@ public class FTPDownloader implements CommandLineRunner{
     public void run(String... args) throws Exception {
         camelMain.addRouteBuilder(ftpDownloaderRouteBuilder);
         camelMain.run();
+    }
+
+    @Bean
+    public Main camelMain() {
+        return new Main();
     }
 }

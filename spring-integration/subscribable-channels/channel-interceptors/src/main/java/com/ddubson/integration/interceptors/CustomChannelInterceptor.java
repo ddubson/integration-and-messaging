@@ -5,11 +5,9 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.ChannelInterceptorAdapter;
 import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.stereotype.Component;
 
 import static com.ddubson.ANSIColor.ANSI_GREEN;
 
-@Component
 public class CustomChannelInterceptor extends ChannelInterceptorAdapter {
     private LogAdapter logAdapter;
 

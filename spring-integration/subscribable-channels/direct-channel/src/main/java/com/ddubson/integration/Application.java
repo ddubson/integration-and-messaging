@@ -4,6 +4,8 @@ package com.ddubson.integration;
 import com.ddubson.CommandLineLogAdapter;
 import com.ddubson.LogAdapter;
 import com.ddubson.integration.gateways.PrinterGateway;
+import com.ddubson.integration.services.PrintService;
+import com.ddubson.integration.services.UppercasePrintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -19,12 +21,11 @@ import java.util.stream.Stream;
 import static com.ddubson.ANSIColor.ANSI_WHITE;
 
 @SpringBootApplication
-@ImportResource("integration-context.xml")
 public class Application implements ApplicationRunner {
     private int numberOfMessages = 10;
 
     @Autowired
-    private PrinterGateway directChannelGateway;
+    private PrinterGateway gateway;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -33,7 +34,7 @@ public class Application implements ApplicationRunner {
             Message<String> message = MessageBuilder.withPayload("Message " + i)
                     .build();
             logAdapter().info("[1] Sending message " + i + " to input channel.", ANSI_WHITE);
-            this.directChannelGateway.print(message);
+            this.gateway.print(message);
         });
     }
 
@@ -44,5 +45,15 @@ public class Application implements ApplicationRunner {
     @Bean
     public LogAdapter logAdapter() {
         return new CommandLineLogAdapter();
+    }
+
+    @Bean
+    public PrintService printService() {
+        return new PrintService(logAdapter());
+    }
+
+    @Bean
+    public UppercasePrintService uppercasePrintService() {
+        return new UppercasePrintService(logAdapter());
     }
 }
