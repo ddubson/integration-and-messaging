@@ -6,6 +6,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
             http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd">
+    <!-- WARNING! This configuration file is for backwards compatibility learning only!-->
+    <!-- Refer to IntegrationConfig class for Java DSL configuration -->
+
     <!-- (1) Create an HTTP listener on the '/' path (port 8080) -->
     <int-http:inbound-channel-adapter id="inboundHttpAdapter"
                                       path="/"
@@ -16,5 +19,4 @@
     <int:service-activator id="mp" ref="messagePrinter" method="print" input-channel="httpChannel"/>
 
     <int:channel id="httpChannel"/>
-    <int:channel id="outputChannel"/>
 </beans>

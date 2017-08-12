@@ -2,11 +2,9 @@ package com.ddubson.integration;
 
 import com.ddubson.LogAdapter;
 import org.springframework.messaging.Message;
-import org.springframework.stereotype.Component;
 
-import static com.ddubson.ANSIColor.*;
+import static com.ddubson.ANSIColor.ANSI_YELLOW;
 
-@Component
 public class MessagePrinter {
     private LogAdapter logAdapter;
 

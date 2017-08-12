@@ -7,12 +7,10 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ImportResource;
 
 import static com.ddubson.ANSIColor.ANSI_WHITE;
 
 @SpringBootApplication
-@ImportResource("integration-context.xml")
 public class Application implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -22,6 +20,11 @@ public class Application implements ApplicationRunner {
     @Bean
     public LogAdapter logAdapter() {
         return new CommandLineLogAdapter();
+    }
+
+    @Bean
+    public MessagePrinter messagePrinter() {
+        return new MessagePrinter(logAdapter());
     }
 
     public static void main(String[] args) {
