@@ -31,8 +31,6 @@ public class RoutingApp implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        //payloadTypeRouter();
-        //headerValueRouter();
         //recipientListRouter();
         customRouter();
     }
@@ -61,25 +59,6 @@ public class RoutingApp implements ApplicationRunner {
         });
 
         printBanner("END RECIPIENT LIST ROUTER");
-    }
-
-    private void headerValueRouter() {
-        printBanner("HEADER VALUE ROUTER");
-        Stream.iterate(0, n -> n + 1).limit(10).forEach(i -> {
-            Message<String> message = MessageBuilder.withPayload("Message " + i)
-                    .setHeader("routeHeader", "string")
-                    .build();
-            this.gateway.print(message);
-        });
-
-        Stream.iterate(0, n -> n + 1).limit(10).forEach(i -> {
-            Message<Integer> message = MessageBuilder
-                    .withPayload(i).setHeader("routeHeader", "int")
-                    .build();
-            this.gateway.print(message);
-        });
-
-        printBanner("END HEADER VALUE ROUTER");
     }
 
     public static void main(String[] args) {

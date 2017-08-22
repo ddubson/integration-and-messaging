@@ -1,0 +1,7 @@
+spring:
+  main:
+    banner-mode: "off"
+  application:
+    name: PayloadTypeRouterApp
+logging:
+  level.root: WARN
