@@ -4,8 +4,12 @@
        xmlns:int="http://www.springframework.org/schema/integration"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
+    <!-- WARNING! This configuration file is for backwards compatibility learning only!-->
+    <!-- Refer to IntegrationConfig class for Java/Kotlin DSL configuration -->
+
     <!-- (1) Send message to inputChannel via gateway -->
-    <int:gateway service-interface="com.ddubson.integration.PrinterGateway" id="gateway"
+    <int:gateway service-interface="com.ddubson.integration.PrinterGateway"
+                 id="gateway"
                  default-request-channel="inputChannel"/>
 
     <!-- (2) Consume off of inputChannel, route based on payload. -->
@@ -15,10 +19,8 @@
     </int:payload-type-router>
 
     <!-- (3) Consume off of respective channels and print -->
-    <int:service-activator id="numberPrint" ref="numericPrintService"
-                           method="print" input-channel="intChannel"/>
-    <int:service-activator id="stringPrint" ref="stringPrintService"
-                           method="print" input-channel="stringChannel"/>
+    <int:service-activator id="numberPrint" ref="numericPrintService" method="print" input-channel="intChannel"/>
+    <int:service-activator id="stringPrint" ref="stringPrintService" method="print" input-channel="stringChannel"/>
 
     <int:channel id="inputChannel"/>
     <int:channel id="stringChannel"/>
