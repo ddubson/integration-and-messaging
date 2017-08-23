@@ -11,7 +11,7 @@
     <!-- Refer to IntegrationConfig class for Java DSL configuration -->
 
     <!-- (1) Send message via printer gateway to 'interceptedChannel' -->
-    <int:gateway service-interface="com.ddubson.integration.gateways.PrinterGateway"
+    <int:gateway service-interface="com.ddubson.integration.PrinterGateway"
                  id="interceptedChannelGateway"
                  default-request-channel="inputChannel"/>
 
