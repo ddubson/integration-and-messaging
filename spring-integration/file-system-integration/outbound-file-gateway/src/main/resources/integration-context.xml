@@ -12,7 +12,7 @@
             http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
     <!-- (1) Read *.txt files from 'assets/read' dir and place on inboundChannel -->
     <int-file:inbound-channel-adapter id="inboundFileAdapter"
-                                      directory="file:assets/read"
+                                      directory="classpath:read"
                                       auto-create-directory="false"
                                       filename-pattern="*.txt"
                                       channel="inboundChannel">
@@ -33,7 +33,7 @@
                                request-channel="transformerChannel"
                                reply-channel="outboundChannel"
                                auto-create-directory="false"
-                               directory="file:assets/write"
+                               directory="classpath:write"
                                mode="REPLACE"
     />
 

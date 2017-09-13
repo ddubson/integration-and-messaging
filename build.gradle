@@ -5,8 +5,9 @@ buildscript {
         springIntegrationJavaDsl = "1.2.2.RELEASE"
         camelVersion = "2.18.1"
         activeMQClientVersion = "5.14.1"
-        kotlinVersion = "1.1.4-2"
+        kotlinVersion = "1.1.4-3"
     }
+
     repositories { mavenCentral() }
 
     dependencies {
