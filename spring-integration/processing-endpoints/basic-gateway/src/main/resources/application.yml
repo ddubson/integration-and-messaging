@@ -1,0 +1,7 @@
+logging:
+  level:
+    root: WARN
+    org.springframework.integration: WARN
+spring:
+  main:
+    banner-mode: "off"

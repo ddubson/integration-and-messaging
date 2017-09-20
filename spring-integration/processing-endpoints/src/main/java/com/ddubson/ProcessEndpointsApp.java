@@ -27,49 +27,14 @@ public class ProcessEndpointsApp implements ApplicationRunner {
     @Qualifier("gateway")
     private PrinterGateway gateway;
 
-    @Autowired
-    @Qualifier("gateway2")
-    private EnhancedPrinterGateway enhancedPrinterGateway;
-
     @Override
     public void run(ApplicationArguments args) throws Exception {
         //serviceActivator();
-        //gateways();
         inboundGateway();
     }
 
     private void inboundGateway() {
         // Done automatically;
-    }
-
-    private void gateways() {
-        printBanner("GATEWAYS");
-        Stream.iterate(0, n -> n + 1).limit(3).forEach(i -> {
-            this.enhancedPrinterGateway.print(new Person("Shane", "Doe"));
-        });
-
-        List<ListenableFuture<String>> futures = Stream
-                .iterate(0, n -> n + 1)
-                .limit(3)
-                .map(i -> this.enhancedPrinterGateway.uppercase(new Person("John", "Doe")))
-                .map(future -> {
-                    future.addCallback(
-                            (result) -> System.out.println("Invoking success callback."),
-                            (ex) -> {
-                            });
-                    return future;
-                }).collect(toList());
-
-        futures.forEach(f -> {
-            try {
-                System.out.println(f.get());
-            } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
-            }
-        });
-
-        printBanner("END GATEWAYS");
-
     }
 
     private void serviceActivator() {

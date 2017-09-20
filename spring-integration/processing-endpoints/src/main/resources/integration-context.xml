@@ -5,6 +5,5 @@
        http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
     <import resource="integration-service-activator.xml"/>
-    <import resource="integration-gateways.xml"/>
     <import resource="integration-inbound-outbound-channel-adapters.xml"/>
 </beans>

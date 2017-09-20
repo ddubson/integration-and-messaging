@@ -4,28 +4,26 @@
        xmlns:int="http://www.springframework.org/schema/integration"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
-    <int:gateway service-interface="com.ddubson.gateways.EnhancedPrinterGateway"
-                 id="gateway2">
+    <!-- (1) Send messages to gateway, send to either print or uppercase channels based on method -->
+    <int:gateway service-interface="com.ddubson.integration.EnhancedPrinterGateway" id="gateway">
         <int:default-header name="globalHeader" value="simpleValue"/>
         <int:method name="print" request-channel="printChannel">
             <!-- args[] refers to args to the print method -->
-            <int:header name="individualHeader" expression="#args[0].firstName" />
+            <int:header name="individualHeader" expression="#args[0].firstName"/>
         </int:method>
         <int:method name="uppercase" request-channel="uppercaseChannel"/>
     </int:gateway>
 
-    <int:channel id="printChannel"/>
-    <int:channel id="uppercaseChannel"/>
-
-    <int:service-activator id="uppercaseServiceRef2"
+    <!-- (2) Print from respective input channels. -->
+    <int:service-activator id="uppercaseServiceRef"
                            ref="uppercaseStringService"
                            method="execute"
                            input-channel="uppercaseChannel"/>
-    <int:service-activator id="stringPrint2"
+    <int:service-activator id="stringPrint"
                            ref="stringPrintService"
                            method="print"
                            input-channel="printChannel"/>
 
-    <bean id="stringPrintService" class="StringPrintService"/>
-    <bean id="uppercaseStringService" class="com.ddubson.services.UppercaseStringService"/>
+    <int:channel id="printChannel"/>
+    <int:channel id="uppercaseChannel"/>
 </beans>
