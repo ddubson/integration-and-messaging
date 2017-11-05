@@ -1,20 +1,24 @@
 buildscript {
     ext {
-        springVersion = "4.3.10.RELEASE"
-        springBootVersion = "1.5.6.RELEASE"
+        springVersion = "4.3.12.RELEASE"
+        springBootVersion = "1.5.8.RELEASE"
         springIntegrationJavaDsl = "1.2.2.RELEASE"
         camelVersion = "2.18.1"
         activeMQClientVersion = "5.14.1"
-        kotlinVersion = "1.1.4-3"
+        kotlinVersion = "1.1.51"
     }
 
     repositories { mavenCentral() }
-
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion"
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
+        classpath "org.jetbrains.kotlin:kotlin-noarg:$kotlinVersion"
     }
+}
+
+plugins {
+    id "org.springframework.boot" version "1.5.8.RELEASE"
+    id "org.jetbrains.kotlin.plugin.spring" version "1.1.51"
 }
 
 apply plugin: "java"

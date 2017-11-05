@@ -7,13 +7,10 @@
             http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
             http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
-    <!-- WARNING! This configuration file is for backwards compatibility learning only!-->
-    <!-- Refer to IntegrationConfig class for Java DSL configuration -->
-
     <!-- (1) Send message via printer gateway to 'interceptedChannel' -->
-    <int:gateway service-interface="com.ddubson.integration.PrinterGateway"
+   <!-- <int:gateway service-interface="com.ddubson.integration.PrinterGateway"
                  id="interceptedChannelGateway"
-                 default-request-channel="inputChannel"/>
+                 default-request-channel="inputChannel"/>-->
 
     <!-- (2) pub-sub channel with a custom interceptor -->
     <!-- uses custom taskExecutor bean to increase number of threads -->

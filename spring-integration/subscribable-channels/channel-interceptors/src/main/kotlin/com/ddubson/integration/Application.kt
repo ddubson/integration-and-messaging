@@ -7,23 +7,18 @@ import org.springframework.boot.ApplicationRunner
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.ImportResource
-import org.springframework.integration.support.MessageBuilder
-import org.springframework.messaging.Message
+import org.springframework.messaging.support.MessageBuilder
 
 @SpringBootApplication
 @ImportResource("integration-context.xml")
-class Application(private val logAdapter: LogAdapter,
-                  private val gateway: PrinterGateway) : ApplicationRunner {
-    private val numberOfMessages = 10
-
-    override fun run(args: ApplicationArguments?) {
-        logAdapter.info("[1] Subscribable Round-Robin Direct Channel", ANSIColor.ANSI_WHITE)
-
-        (0..numberOfMessages).forEach { i ->
-            val message: Message<String> = MessageBuilder.withPayload("Message $i")
-                    .build()
-            logAdapter.info("[1] Sending message $i to input channel.", ANSIColor.ANSI_RED)
-            this.gateway.print(message)
+class Application(val logAdapter: LogAdapter,
+                  val gateway: PrinterGateway) : ApplicationRunner {
+    override fun run(args: ApplicationArguments) {
+        logAdapter.info("[1] Subscribable Round-Robin Direct Channel - Channel Interceptor", ANSIColor.ANSI_WHITE)
+        (0..10).forEach { i ->
+            val message = MessageBuilder.withPayload("Message $i").build()
+            logAdapter.info("[1] Sending message $i to input channel.", ANSIColor.ANSI_YELLOW)
+            gateway.print(message)
         }
     }
 }
