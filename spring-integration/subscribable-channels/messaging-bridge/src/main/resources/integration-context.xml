@@ -7,11 +7,8 @@
             http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
             http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
-    <!-- WARNING! This configuration file is for backwards compatibility learning only!-->
-    <!-- Refer to IntegrationConfig class for Java DSL configuration -->
-
     <!-- (1) Send messages to gateway -->
-    <int:gateway service-interface="com.ddubson.integration.gateways.PrinterGateway"
+    <int:gateway service-interface="com.ddubson.integration.PrinterGateway"
                  id="pubSubChannelGateway" default-request-channel="bridgedPollableChannel"/>
 
     <!-- (2) Poll for 2 msgs bridge channel every 5 seconds -->
