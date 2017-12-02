@@ -1,11 +1,11 @@
 buildscript {
     ext {
-        springVersion = "4.3.12.RELEASE"
-        springBootVersion = "1.5.8.RELEASE"
+        springVersion = "4.3.13.RELEASE"
+        springBootVersion = "1.5.9.RELEASE"
         springIntegrationJavaDsl = "1.2.2.RELEASE"
         camelVersion = "2.18.1"
         activeMQClientVersion = "5.14.1"
-        kotlinVersion = "1.1.51"
+        kotlinVersion = "1.2.0"
     }
 
     repositories { mavenCentral() }
@@ -17,14 +17,9 @@ buildscript {
 }
 
 plugins {
-    id "org.springframework.boot" version "1.5.8.RELEASE"
-    id "org.jetbrains.kotlin.plugin.spring" version "1.1.51"
+    id "org.jetbrains.kotlin.plugin.spring" version "1.2.0"
+    id 'org.springframework.boot' version '1.5.9.RELEASE'
 }
-
-apply plugin: "java"
-apply plugin: "kotlin"
-apply plugin: "kotlin-spring"
-apply plugin: "org.springframework.boot"
 
 version '1.0'
 sourceCompatibility = 1.8
